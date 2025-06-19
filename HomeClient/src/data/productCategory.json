@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Website Templates",
+    "description": "Professionally designed templates for modern websites, landing pages, and SaaS platforms fully responsive and developer-ready.",
+    "image": "https://www.graphie.co.id/uploads/blog/28-ilustrasi-digital.jpg",
+    "path": "/products/website-templates"
+  },
+  {
+    "name": "AI Operating Systems",
+    "description": "Customizable AI-driven OS modules for intelligent automation, predictive analytics, and scalable enterprise deployment.",
+    "image": "https://miro.medium.com/v2/resize:fit:1024/1*Jzkw__aVnv-6UW6kkHf0BQ.jpeg",
+    "path": "/products/ai-operating-systems"
+  }
+]
