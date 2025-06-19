@@ -46,24 +46,18 @@ cd lumino-frontend
 ```
 2. Install dependencies
 ```bash
-Copy
-Edit
 npm install
 # or
 yarn
 ```
 3. Run the development server
 ```bash
-Copy
-Edit
 npm run dev
 # or
 yarn dev
 ```
 🧪 Build for Production
 ```bash
-Copy
-Edit
 npm run build
 # or
 yarn build
