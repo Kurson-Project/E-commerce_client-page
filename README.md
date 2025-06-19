@@ -31,12 +31,6 @@
 
 ---
 
-yaml
-Copy
-Edit
-
----
-
 ## 🛠️ Getting Started
 
 ### 1. Clone this repository
@@ -63,14 +57,18 @@ npm run build
 yarn build
 ```
 🌐 Live Demo
+
 Coming soon...
 
 🙌 Contributing
+
 Contributions, issues and feature requests are welcome!
 Feel free to fork this repo and submit a pull request.
 
 📄 License
+
 This project is open source and available under the MIT License.
 
 👨‍💻 Developed by
+
 Zaid Rengga
