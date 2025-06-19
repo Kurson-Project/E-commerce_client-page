@@ -19,12 +19,6 @@
 
 ---
 
-## 🖼️ Screenshots
-
-> *Tambahkan screenshot UI jika ada, atau link demo.*
-
----
-
 ## 📦 Tech Stack
 
 | Tech          | Description                             |
@@ -36,20 +30,6 @@
 | Framer Motion | Animation and transition engine         |
 
 ---
-
-## 📁 Project Structure
-
-lumino/
-├── public/ # Static assets
-├── src/
-│ ├── components/ # UI components
-│ ├── pages/ # Route pages
-│ ├── data/ # Static JSON or mock data
-│ ├── hooks/ # Custom React hooks
-│ ├── utils/ # Helper functions
-│ └── main.tsx # App entry point
-├── tailwind.config.ts
-└── vite.config.ts
 
 yaml
 Copy
@@ -63,27 +43,31 @@ Edit
 ```bash
 git clone https://github.com/username/lumino-frontend.git
 cd lumino-frontend
+```
 2. Install dependencies
-bash
+```bash
 Copy
 Edit
 npm install
 # or
 yarn
+```
 3. Run the development server
-bash
+```bash
 Copy
 Edit
 npm run dev
 # or
 yarn dev
+```
 🧪 Build for Production
-bash
+```bash
 Copy
 Edit
 npm run build
 # or
 yarn build
+```
 🌐 Live Demo
 Coming soon...
 
@@ -96,5 +80,3 @@ This project is open source and available under the MIT License.
 
 👨‍💻 Developed by
 Zaid Rengga
-Your Website or LinkedIn
-GitHub
