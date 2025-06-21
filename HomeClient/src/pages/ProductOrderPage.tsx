@@ -79,18 +79,12 @@ export default function ProductOrderPage() {
 
         {!submitted ? (
           <form className="space-y-6" onSubmit={handleSubmit}>
-            {/* Nama */}
+            {/* Platform Name */}
             <div className="space-y-2">
-              <Label htmlFor="name">Full Name</Label>
-              <Input id="name" required placeholder="Your name" />
+              <Label htmlFor="platform">Platform Name</Label>
+              <Input id="platform" required placeholder="Your platform name" />
             </div>
-
-            {/* Email */}
-            <div className="space-y-2">
-              <Label htmlFor="email">Email Address</Label>
-              <Input id="email" type="email" required placeholder="you@example.com" />
-            </div>
-
+            
             {/* Catatan */}
             <div className="space-y-2">
               <Label htmlFor="notes">Additional Notes (optional)</Label>

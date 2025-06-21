@@ -8,18 +8,21 @@ import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMe
 import { useCart, type CartItem } from "@/hooks/useCartProduct"
 import { useAuth } from "@/hooks/useAuth"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion"
 
 const pathRoutes = [
   {
-    name: "Products", path: "/products", more: [
+    name: "Products", path: "#", more: [
+      { name: "All Products", path: "/products" },
       { name: "Website Templates", path: "/products/website-templates" },
-      { name: "AI Operating Systems", path: "/products/ai-operating-systems" },
+      { name: "AI Agents", path: "/products/ai-agents" },
+      { name: "Customize", path: "/products/customize" },
     ]
   },
   { name: "About", path: "/about" },
+  { name: "Contact", path: "/contact" },
   {
     name: "More", path: "#", more: [
-      { name: "Contact", path: "/contact" },
       { name: "FAQ", path: "/faq" },
       { name: "Privacy", path: "/privacy" },
       { name: "Terms", path: "/terms" },
@@ -145,28 +148,26 @@ const AppNavbar = () => {
             <ul className="flex flex-col gap-2 px-4">
               {pathRoutes.map((route) => (
                 pathRoutes.find((r) => r.path === route.path)?.more ? (
-                  <li key={route.name} className="w-full">
-                    <Button
-                      variant={currentPath === route.path ? "default" : "ghost"}
-                      className="w-full justify-start"
-                      asChild
-                    >
-                      <Link to={route.path}>{route.name}</Link>
-                    </Button>
-                    <ul className="flex flex-col gap-2 px-4">
-                      {route.more?.map((subRoute) => (
-                        <li key={subRoute.name} className="w-full">
-                          <Button
-                            variant={currentPath === subRoute.path ? "default" : "ghost"}
-                            className="w-full justify-start"
-                            asChild
-                          >
-                            <Link to={subRoute.path}>{subRoute.name}</Link>
-                          </Button>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
+                  <Accordion type="single" collapsible className="w-full" key={route.name}>
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger className="px-4">{route.name}</AccordionTrigger>
+                      <AccordionContent>
+                        <ul className="flex flex-col gap-2 px-4">
+                          {route.more?.map((subRoute) => (
+                            <li key={subRoute.name} className="w-full">
+                              <Button
+                                variant={currentPath === subRoute.path ? "default" : "ghost"}
+                                className="w-full justify-start"
+                                asChild
+                              >
+                                <Link to={subRoute.path}>{subRoute.name}</Link>
+                              </Button>
+                            </li>
+                          ))}
+                        </ul>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
                 ) : (
                   <li key={route.name} className="w-full">
                     <Button

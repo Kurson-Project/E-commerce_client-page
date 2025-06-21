@@ -1,14 +1,17 @@
 [
   {
     "name": "Website Templates",
-    "description": "Professionally designed templates for modern websites, landing pages, and SaaS platforms fully responsive and developer-ready.",
-    "image": "https://www.graphie.co.id/uploads/blog/28-ilustrasi-digital.jpg",
+    "description": "Explore a curated collection of professionally designed, fully responsive website templates optimized for e-commerce, landing pages, and SaaS. Each template is developer-ready and easily customizable to match your brand identity.",
     "path": "/products/website-templates"
   },
   {
-    "name": "AI Operating Systems",
-    "description": "Customizable AI-driven OS modules for intelligent automation, predictive analytics, and scalable enterprise deployment.",
-    "image": "https://miro.medium.com/v2/resize:fit:1024/1*Jzkw__aVnv-6UW6kkHf0BQ.jpeg",
-    "path": "/products/ai-operating-systems"
+    "name": "AI Agents",
+    "description": "Deploy intelligent, customizable AI agents designed to automate customer support, provide real-time recommendations, and analyze user behavior. Built for scalability and easy integration into your digital ecosystem.",
+    "path": "/products/ai-agents"
+  },
+  {
+    "name": "Customize",
+    "description": "Effortlessly customize your website templates and AI agents using our intuitive, no-code interface. Personalize designs, behaviors, and experiences to align perfectly with your business goals and brand voice.",
+    "path": "/products/customize"
   }
 ]

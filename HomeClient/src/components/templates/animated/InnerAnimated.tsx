@@ -6,11 +6,11 @@ const InnerAnimation = ({ children }: { children: React.ReactNode }) => {
             initial={{ opacity: 0 }}
             animate={{
                 opacity: 1,
-                transition: { duration: 0.3, ease: "easeInOut", type: "tween", delay: 0.2 }
+                transition: { duration: 0.2, ease: "easeInOut", type: "tween", delay: 0.2 }
             }}
             exit={{
                 opacity: 0,
-                transition: { duration: 0.3, ease: "easeInOut", type: "tween", delay: 0.2 }
+                transition: { duration: 0.2, ease: "easeInOut", type: "tween", delay: 0.2 }
             }}
             className="w-full"
         >

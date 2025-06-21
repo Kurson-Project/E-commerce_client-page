@@ -105,9 +105,3 @@ We welcome pull requests and new feature ideas!
 3. Commit with clear messages  
 4. Push and submit a Pull Request  
 5. Wait for review & merge 😊
-
----
-
-## ✨ Developer
-
-**Zaid Rengga**

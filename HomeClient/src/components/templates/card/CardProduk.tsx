@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { StarRating } from "@/components/ui/star-rating";
 import { useNavigate } from "react-router-dom";
 
 interface CardProdukProps {
@@ -40,7 +40,7 @@ const CardProduk = ({ title, image, price, tools, className, rating }: CardProdu
                         ))}
                     </div>
                     <div className="flex items-center gap-1">
-                        <StarRatingDisplay rating={rating} size={16} />
+                        <StarRating rating={rating} size={16} />
                         <span className="text-sm">{rating}</span>
                     </div>
                 </div>
@@ -48,42 +48,6 @@ const CardProduk = ({ title, image, price, tools, className, rating }: CardProdu
         </div>
     );
 };
-
-interface StarRatingDisplayProps {
-    rating: number
-    size?: number
-}
-
-export const StarRatingDisplay = ({ rating, size = 20 }: StarRatingDisplayProps) => {
-    const fullStars = Math.floor(rating)
-    const hasHalfStar = rating - fullStars >= 0.1 && rating - fullStars < 0.9
-    const roundedStars = Math.round(rating)
-
-    return (
-        <div className="flex gap-1 items-center">
-            {Array.from({ length: 5 }, (_, i) => {
-                if (i < fullStars) {
-                    return <Star key={i} size={size} className="text-yellow-400 fill-yellow-400" />
-                } else if (i === fullStars && hasHalfStar) {
-                    return (
-                        <div key={i} className="relative">
-                            <Star size={size} className="text-muted-foreground" />
-                            <Star
-                                size={size}
-                                className="text-yellow-400 fill-yellow-400 absolute top-0 left-0 overflow-hidden"
-                                style={{ clipPath: "inset(0 50% 0 0)" }}
-                            />
-                        </div>
-                    )
-                } else if (i < roundedStars) {
-                    return <Star key={i} size={size} className="text-yellow-400 fill-yellow-400" />
-                } else {
-                    return <Star key={i} size={size} className="text-muted-foreground" />
-                }
-            })}
-        </div>
-    )
-}
 
 
 export default CardProduk;

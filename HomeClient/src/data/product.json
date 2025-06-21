@@ -303,7 +303,7 @@
     "title": "Neural OS Interface",
     "image": "https://www.unsell.design/wp-content/uploads/2022/02/553e0bb4-featured-image.jpg",
     "price": 65,
-    "category": "AI Operating Systems",
+    "category": "AI Agents",
     "description": "Cutting-edge interface for neural network operating systems featuring real-time neural activity visualization, model training dashboards, and dataset management tools. Includes interactive node editors for architecture design, training progress monitors, and hyperparameter tuning interfaces. Built with Python backend integration points and PyTorch-compatible visualization components. Features dark mode optimized for prolonged usage, with accessibility considerations for research environments. Comes with documentation on integrating with popular ML frameworks and deployment pipelines.",
     "features": [
       "Real-time neural activity heatmaps",
@@ -353,7 +353,7 @@
     "title": "Smart Assistant UI",
     "image": "https://www.unsell.design/wp-content/uploads/2022/02/553e0bb4-featured-image.jpg",
     "price": 58,
-    "category": "AI Operating Systems",
+    "category": "AI Agents",
     "description": "Voice and text-based smart assistant interface with conversational UI components, intent visualization, and context-aware interaction flows. Features include multi-modal input handling (voice, text, touch), conversation history management, and plugin architecture for skill integration. Built with TensorFlow.js for client-side AI capabilities and real-time speech visualization. Includes 5 pre-designed theme variants and accessibility features for inclusive design. Comes with documentation for connecting to popular NLP APIs and extending functionality.",
     "features": [
       "Multi-modal input (voice typing, text, touch)",
@@ -403,7 +403,7 @@
     "title": "AI UX Dashboard",
     "image": "https://www.unsell.design/wp-content/uploads/2022/02/553e0bb4-featured-image.jpg",
     "price": 72,
-    "category": "AI Operating Systems",
+    "category": "AI Agents",
     "description": "Comprehensive dashboard for monitoring and interacting with AI systems, featuring model performance metrics, data drift detection, and prediction analysis tools. Includes explainable AI components for model interpretability, confidence level visualizations, and feedback collection mechanisms. Built with TypeScript for type safety and Next.js for server-side rendering capabilities. Features real-time data streaming interfaces, alert systems, and team collaboration tools. Designed for both technical and non-technical users with role-specific views.",
     "features": [
       "Model performance tracking (precision/recall/F1)",
@@ -453,7 +453,7 @@
     "title": "VoiceOS Layout Kit",
     "image": "https://www.unsell.design/wp-content/uploads/2022/02/553e0bb4-featured-image.jpg",
     "price": 64,
-    "category": "AI Operating Systems",
+    "category": "AI Agents",
     "description": "Multi-platform voice operating system interface components for building conversational applications. Includes voice waveform visualizers, intent confirmation dialogs, and multi-step flow templates. Features accessibility-focused design with screen reader compatibility and visual voice feedback elements. Built with Flutter for cross-platform consistency and Firebase integration for real-time data sync. Comes with 8 pre-designed conversation patterns and documentation for voice API integration. Includes testing tools for voice interaction prototyping.",
     "features": [
       "Cross-platform Flutter components (iOS/Android/Web)",
@@ -503,7 +503,7 @@
     "title": "Artificial Agent Template",
     "image": "https://www.unsell.design/wp-content/uploads/2022/02/553e0bb4-featured-image.jpg",
     "price": 71,
-    "category": "AI Operating Systems",
+    "category": "AI Agents",
     "description": "Modular interface framework for building artificial agent applications with personality customization and multi-channel interaction capabilities. Features include emotion state visualization, memory recall interfaces, and task management systems. Built with Go for high-performance backend integration and gRPC for efficient microservice communication. Includes 5 distinct personality profiles with matching visual styles and interaction patterns. Comes with simulation tools for testing agent behavior and documentation for connecting to knowledge bases.",
     "features": [
       "Personality customization system",
@@ -550,10 +550,10 @@
     ]
   },
   {
-    "title": "AI Operating Systems UI",
+    "title": "AI Agents UI",
     "image": "https://www.unsell.design/wp-content/uploads/2022/02/553e0bb4-featured-image.jpg",
     "price": 59,
-    "category": "AI Operating Systems",
+    "category": "AI Agents",
     "description": "Foundation UI kit for AI-powered operating systems featuring adaptive interfaces, context-aware components, and learning feedback loops. Includes skill marketplace templates, permission management, and cross-AI collaboration tools. Built with Python for machine learning integration and TensorFlow for model serving interfaces. Features progressive disclosure patterns for complex functionality and onboarding flows for new users. Comes with 3 complete application templates (productivity assistant, smart home controller, research collaborator) and style guide for extension.",
     "features": [
       "Adaptive interface framework",

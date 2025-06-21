@@ -16,6 +16,7 @@ import RegisterPage from "./pages/RegsiterPage"
 import ProductOrderPage from "./pages/ProductOrderPage"
 import ProductCartPage from "./pages/ProductCartPage"
 import ProfilePage from "./pages/ProfilePage"
+import ProductModify from "./pages/ProductModify"
 
 const MainLayout = () => {
   return (
@@ -42,6 +43,7 @@ const App = () => {
           <Route path="/products/details/:id" element={<ProductDetailPage />} />
           <Route path="/products/order/:id" element={<ProductOrderPage />} />
           <Route path="/products/cart" element={<ProductCartPage />} />
+          <Route path="/products/modify/:id" element={<ProductModify />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/faq" element={<FaqPage />} />

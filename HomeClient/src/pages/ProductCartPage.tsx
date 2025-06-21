@@ -50,7 +50,7 @@ export default function ProductCartPage() {
                             </div>
                         </div>
 
-                        <div className="flex gap-4">
+                        <div className="flex items-center gap-4">
                             <Button
                                 asChild
                                 size="sm"
@@ -72,7 +72,7 @@ export default function ProductCartPage() {
                                 onClick={() => removeFromCart(item.title)}
                                 title="Remove from cart"
                             >
-                                <Trash2 />
+                                <Trash2/>
                             </Button>
                         </div>
                     </div>
@@ -88,7 +88,6 @@ export default function ProductCartPage() {
                     <Button variant="outline" onClick={clearCart}>
                         Clear Cart
                     </Button>
-                    <Button onClick={() => navigate("/checkout")}>Proceed to Checkout</Button>
                 </div>
             </div>
         </section>

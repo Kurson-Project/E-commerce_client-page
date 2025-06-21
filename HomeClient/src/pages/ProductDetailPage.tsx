@@ -12,12 +12,18 @@ import DataProduct from "@/data/product.json"
 import CardProduk from "@/components/templates/card/CardProduk"
 import { ArrowRight } from "lucide-react"
 import { useCart } from "@/hooks/useCartProduct"
+import { StarRating, StarRatingInput } from "@/components/ui/star-rating"
+import { useState } from "react"
+import { Textarea } from "@/components/ui/textarea"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 const ProductDetailPage = () => {
+    const [userRating, setUserRating] = useState(0)
+
     const { id } = useParams();
     const product = DataProduct.find((item) => item.title === id)
 
-    const Rekomendation = DataProduct.filter((item) => item.category === product?.category).slice(0, 2)
+    const Rekomendation = DataProduct.filter((item) => item.category === product?.category).slice(0, 2);
 
     const { addToCart, cart } = useCart();
 
@@ -63,8 +69,13 @@ const ProductDetailPage = () => {
                             </div>
                         ))}
                     </div>
-                    <p className="text-2xl font-semibold text-primary">${product.price}</p>
-
+                    <div className="flex items-center gap-2">
+                        <StarRating rating={product.rating} size={16} />
+                        <span className="text-sm text-muted-foreground">
+                            {product.rating}
+                        </span>
+                    </div>
+                    <p className="text-2xl font-semibold text-primary">${product.price} <span className="text-muted-foreground font-medium line-through">${(product.price * 1.2).toFixed(2)}</span></p>
                     <div className="flex gap-4">
                         <Dialog>
                             <DialogTrigger asChild>
@@ -97,6 +108,9 @@ const ProductDetailPage = () => {
                                 </Button>
                             </DialogContent>
                         </Dialog>
+                        <Button variant="secondary" asChild>
+                            <Link to={`/products/modify/${product.title}`}>Modify</Link>
+                        </Button>
                         <Button
                             variant="outline"
                             aria-label="Add to cart"
@@ -126,7 +140,7 @@ const ProductDetailPage = () => {
                     {/* Deskripsi Produk */}
                     <div aria-labelledby="description-heading">
                         <h3 id="description-heading" className="text-2xl font-bold text-foreground mb-6">
-                            📝 Description
+                            Description
                         </h3>
                         <p className="text-lg text-foreground">{product.description}</p>
                     </div>
@@ -134,7 +148,7 @@ const ProductDetailPage = () => {
                     {/* Fitur Produk */}
                     <div aria-labelledby="features-heading">
                         <h3 id="features-heading" className="text-2xl font-bold text-foreground mb-6">
-                            ✨ Features
+                            Features
                         </h3>
                         <ul className="space-y-2">
                             {product.features.map((feature, index) => (
@@ -148,6 +162,32 @@ const ProductDetailPage = () => {
                             ))}
                         </ul>
                     </div>
+                    <Accordion type="single" collapsible>
+                        <AccordionItem value="reviews">
+                            <AccordionTrigger className="items-center text-primary">
+                                <span>Reviews ({product.reviews.length})</span>
+                            </AccordionTrigger>
+                            <AccordionContent>
+                                <div className="flex flex-col gap-4">
+                                    {product.reviews.map((review, index) => (
+                                        <div key={index} className="flex flex-col gap-2">
+                                            <div className="flex items-center gap-2">
+                                                <StarRating rating={review.rating} />
+                                                <span className="text-sm">({review.rating}/5)</span>
+                                            </div>
+                                            <p className="text-sm">"{review.comment}"</p>
+                                        </div>
+                                    ))}
+                                    <div className="flex flex-col gap-2 p-2 border rounded-lg">
+                                        <p className="font-semibold">Submit your comments</p>
+                                        <StarRatingInput initialRating={userRating} onChange={setUserRating} />
+                                        <Textarea placeholder="Comment" />
+                                        <Button className="w-full">Submit</Button>
+                                    </div>
+                                </div>
+                            </AccordionContent>
+                        </AccordionItem>
+                    </Accordion>
                 </div>
 
                 <hr className="my-8" />
