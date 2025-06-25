@@ -1,4 +1,11 @@
-import { FolderPlus, Home, Inbox, Settings, ShoppingBag } from "lucide-react"
+import {
+    LayoutDashboard,
+    Package,
+    ShoppingCart,
+    Users,
+    Settings,
+    Bell,
+} from 'lucide-react';
 
 import {
     Sidebar,
@@ -6,43 +13,55 @@ import {
     SidebarGroup,
     SidebarGroupContent,
     SidebarGroupLabel,
+    SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { Link, useLocation } from 'react-router-dom';
 
 // Menu items.
 const items = [
     {
-        title: "Home",
-        url: "#",
-        icon: Home,
+        title: "Overview",
+        url: "/",
+        icon: LayoutDashboard,
     },
     {
         title: "Products",
-        url: "#",
-        icon: ShoppingBag,
+        url: "/products",
+        icon: Package,
     },
     {
-        title: "Create Product",
-        url: "#",
-        icon: FolderPlus,
+        title: "Orders",
+        url: "/orders",
+        icon: ShoppingCart,
     },
     {
-        title: "Inbox",
-        url: "#",
-        icon: Inbox,
+        title: "Notifications",
+        url: "/notifications",
+        icon: Bell,
+    },
+    {
+        title: "Users",
+        url: "/users",
+        icon: Users,
     },
     {
         title: "Settings",
-        url: "#",
+        url: "/settings",
         icon: Settings,
     },
 ]
 
 export function AppSidebar() {
+    const location = useLocation().pathname
+
     return (
         <Sidebar collapsible="icon" variant="floating">
+            <SidebarHeader className='border-b'>
+                <SidebarGroupLabel className='text-2xl flex items-center gap-1 text-primary font-extrabold'>Lumino <span className='text-sm text-muted-foreground font-semibold mt-1.5'>E-commerce</span></SidebarGroupLabel>
+            </SidebarHeader>
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarGroupLabel>Application</SidebarGroupLabel>
@@ -50,11 +69,11 @@ export function AppSidebar() {
                         <SidebarMenu>
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild>
-                                        <a href={item.url}>
+                                    <SidebarMenuButton size="lg" className={location === item.url ? "bg-primary/10 hover:bg-primary/10 text-primary hover:text-primary" : ""} tooltip={item.title} asChild>
+                                        <Link to={item.url}>
                                             <item.icon />
                                             <span>{item.title}</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}

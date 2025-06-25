@@ -1,24 +1,26 @@
 import { Link, useParams } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog"
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 import DataProduct from "@/data/product.json"
 import CardProduk from "@/components/templates/card/CardProduk"
 import { ArrowRight } from "lucide-react"
 import { useCart } from "@/hooks/useCartProduct"
 import { StarRating, StarRatingInput } from "@/components/ui/star-rating"
 import { useState } from "react"
-import { Textarea } from "@/components/ui/textarea"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { Badge } from "@/components/ui/badge"
 
 const ProductDetailPage = () => {
-    const [userRating, setUserRating] = useState(0)
+    const [userRating, setUserRating] = useState(0);
 
     const { id } = useParams();
     const product = DataProduct.find((item) => item.title === id)
@@ -77,37 +79,40 @@ const ProductDetailPage = () => {
                     </div>
                     <p className="text-2xl font-semibold text-primary">${product.price} <span className="text-muted-foreground font-medium line-through">${(product.price * 1.2).toFixed(2)}</span></p>
                     <div className="flex gap-4">
-                        <Dialog>
-                            <DialogTrigger asChild>
+                        <AlertDialog>
+                            <AlertDialogTrigger asChild>
                                 <Button aria-label="Buy this product">Buy Now</Button>
-                            </DialogTrigger>
-                            <DialogContent >
-                                <DialogHeader>
-                                    <DialogTitle>Checkout</DialogTitle>
-                                    <DialogDescription>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent >
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>Checkout</AlertDialogTitle>
+                                    <AlertDialogDescription>
                                         Are you sure you want to buy this product?
-                                    </DialogDescription>
-                                </DialogHeader>
-                                <div className="flex gap-4 items-center mb-4">
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <div className="flex gap-4 items-center p-2 border rounded-lg">
                                     <img
                                         src={product.image}
                                         alt={`Checkout preview of ${product.title}`}
-                                        className="w-16 h-16 object-cover rounded"
+                                        className="w-20 h-20 object-cover rounded"
                                     />
-                                    <div>
-                                        <h4 className="font-medium text-foreground">
+                                    <div className="flex flex-col gap-1">
+                                        <h4 className="font-semibold text-foreground">
                                             {product.title}
                                         </h4>
-                                        <p className="text-sm text-muted-foreground">
+                                        <Badge>{product.category}</Badge>
+                                        <p className="text-xl font-medium flex items-center gap-2">
                                             ${product.price}
+                                            <span className="text-muted-foreground line-through">${(product.price * 1.2).toFixed(2)}</span>
                                         </p>
                                     </div>
                                 </div>
-                                <Button className="w-full" asChild>
-                                    <Link to={`/products/order/${product.title}`}>Buy Now</Link>
-                                </Button>
-                            </DialogContent>
-                        </Dialog>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                    <AlertDialogAction asChild><Link to={`/products/order/${product.title}`}>Buy Now</Link></AlertDialogAction>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
                         <Button variant="secondary" asChild>
                             <Link to={`/products/modify/${product.title}`}>Modify</Link>
                         </Button>
@@ -130,7 +135,10 @@ const ProductDetailPage = () => {
                                 : "Add to cart"}
                         </Button>
                     </div>
-
+                    <div className="flex flex-col gap-2 pt-4 border-t">
+                        <h2 className="text-2xl font-bold text-foreground">Give Your Rating</h2>
+                        <StarRatingInput size={30} initialRating={userRating} onChange={setUserRating} />
+                    </div>
                 </div>
             </section>
 
@@ -162,32 +170,6 @@ const ProductDetailPage = () => {
                             ))}
                         </ul>
                     </div>
-                    <Accordion type="single" collapsible>
-                        <AccordionItem value="reviews">
-                            <AccordionTrigger className="items-center text-primary">
-                                <span>Reviews ({product.reviews.length})</span>
-                            </AccordionTrigger>
-                            <AccordionContent>
-                                <div className="flex flex-col gap-4">
-                                    {product.reviews.map((review, index) => (
-                                        <div key={index} className="flex flex-col gap-2">
-                                            <div className="flex items-center gap-2">
-                                                <StarRating rating={review.rating} />
-                                                <span className="text-sm">({review.rating}/5)</span>
-                                            </div>
-                                            <p className="text-sm">"{review.comment}"</p>
-                                        </div>
-                                    ))}
-                                    <div className="flex flex-col gap-2 p-2 border rounded-lg">
-                                        <p className="font-semibold">Submit your comments</p>
-                                        <StarRatingInput initialRating={userRating} onChange={setUserRating} />
-                                        <Textarea placeholder="Comment" />
-                                        <Button className="w-full">Submit</Button>
-                                    </div>
-                                </div>
-                            </AccordionContent>
-                        </AccordionItem>
-                    </Accordion>
                 </div>
 
                 <hr className="my-8" />

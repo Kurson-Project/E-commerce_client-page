@@ -1,7 +1,7 @@
 import CardProduk from "@/components/templates/card/CardProduk"
 import { Button } from "@/components/ui/button"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
-import { ArrowRight, UserPlus, Search, CreditCard, Settings } from "lucide-react"
+import { ArrowRight, UserPlus, Search, CreditCard, Settings, Download } from "lucide-react"
 import { Link } from "react-router-dom"
 import { FadeIn } from "@/components/templates/animated/FadeMotion"
 import ProductJson from "@/data/product.json"
@@ -23,17 +23,17 @@ const steps = [
     desc: "Browse by category, price, popularity, and AI compatibility.",
   },
   {
-    icon: <Settings className="w-7 h-7" />,
-    title: "Customize Platform Details",
-    desc: "Enter your website or AI agent name, branding, and preferences before checkout.",
-  },
-  {
     icon: <CreditCard className="w-7 h-7" />,
     title: "One-Time Payment, Lifetime Access",
     desc: "Pay securely and get full access with official licenses.",
   },
   {
     icon: <Settings className="w-7 h-7" />,
+    title: "Customize Platform Details",
+    desc: "Enter your website or AI agent name, branding, and preferences before checkout.",
+  },
+  {
+    icon: <Download className="w-7 h-7" />,
     title: "Use & Get Support",
     desc: "Enjoy instant downloads, lifetime updates, and expert assistance.",
   },

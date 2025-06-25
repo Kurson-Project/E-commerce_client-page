@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Link, Navigate } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import { AuthForm, InputFormAuth } from "@/components/layouts/AuthForm"
 import { validateEmail, validatePassword, validateUsername } from "@/components/templates/ValidateForm"
 import { useAuth } from "@/hooks/useAuth"
@@ -10,26 +10,29 @@ const RegisterPage = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState({
+        register: "",
         username: "",
         email: "",
         password: ""
     })
 
-    const { login, isAuthenticated } = useAuth()
+    const navigate = useNavigate()
 
-    const dummyUser = {
-        name: username,
-        email: email,
-    }
-    const dummyToken = "1234567890abcdef"
+    const { register, isAuthenticated, error: authError, loading } = useAuth()
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (!username) setError({ ...error, username: "Username is required" })
         else if (!email) setError({ ...error, email: "Email is required" })
         else if (!password) setError({ ...error, password: "Password is required" })
         else {
-            login(dummyUser, dummyToken)
+            const isRegister = await register(username, email, password)
+            if (isRegister) {
+                window.location.reload()
+                navigate("/")
+            } else {
+                setError({ ...error, register: authError.register })
+            }
         }
     }
 
@@ -37,6 +40,7 @@ const RegisterPage = () => {
 
     return (
         <AuthForm handleSubmit={handleSubmit} title="CREATE YOUR ACCOUNT">
+            {error.register && <p className="text-sm text-red-500">{error.register}</p>}
             <InputFormAuth
                 type="text"
                 label="Username"
@@ -67,12 +71,12 @@ const RegisterPage = () => {
                 }}
                 error={error.password}
             />
-            <div className="w-full flex items-center text-sm text-muted-foreground">
+            <div className="w-full flex items-center text-sm text-muted-foreground gap-2">
+                <input type="checkbox" className="ml-2" required/>
                 Have you agreed to the <Link to="/terms" className="text-blue-600 ml-1 hover:underline dark:text-blue-500">Terms and Conditions</Link>?
-                <input type="checkbox" className="ml-2" />
             </div>
             <div className="w-full flex flex-col gap-2">
-                <Button type="submit" className="w-full">Register</Button>
+                <Button type="submit" disabled={loading} className="w-full">{loading ? "Loading..." : "Register"}</Button>
                 <div className="flex items-center">
                     <div className="w-full border-t border-muted-foreground"></div>
                     <span className="px-2 text-sm text-muted-foreground">or</span>

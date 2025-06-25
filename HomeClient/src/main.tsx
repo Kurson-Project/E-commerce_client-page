@@ -1,4 +1,3 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
@@ -8,7 +7,7 @@ import { CartProductProvider } from './context/CartProductProvider.tsx'
 import { AuthProvider } from './context/AuthProvider.tsx'
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  <>
     <BrowserRouter>
       <ThemeProvider defaultTheme="system" storageKey='vite-ui-theme'>
         <AuthProvider>
@@ -18,5 +17,5 @@ createRoot(document.getElementById('root')!).render(
         </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>
-  </StrictMode>
+  </>
 )

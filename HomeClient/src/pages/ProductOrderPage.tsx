@@ -1,131 +1,106 @@
-import { Navigate, useNavigate, useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import DataProduct from "@/data/product.json"
-import { useAuth } from "@/hooks/useAuth"
+import { useParams } from 'react-router-dom'
+import { useState } from 'react'
+import prodctjson from '../data/product.json'
+import {
+    Tabs, TabsContent, TabsList, TabsTrigger
+} from '@/components/ui/tabs'
+import {
+    Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle
+} from '@/components/ui/card'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Button } from '@/components/ui/button'
 
-export default function ProductOrderPage() {
-  const { id } = useParams()
-  const navigate = useNavigate()
-  const [submitted, setSubmitted] = useState(false)
-  const [paymentMethod, setPaymentMethod] = useState("bank")
+const ProductOrderPage = () => {
+    const { id } = useParams()
+    const product = prodctjson.find((item) => item.title === id)
+    const [tabValue, setTabValue] = useState('form')
+    const [isSubmitted, setIsSubmitted] = useState(false)
 
-  const { isAuthenticated } = useAuth()
+    const handleOrderSubmit = () => {
+        // Kirim data ke backend di sini jika perlu
+        setIsSubmitted(true)
+        setTabValue('success')
+    }
 
-  const product = DataProduct.find((item) => item.title === id)
-
-  useEffect(() => {
-    if (!product) navigate("/products")
-  }, [product, navigate])
-
-  if (!product) return null
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setSubmitted(true)
-  }
-
-  const paymentDetails = {
-    bank: (
-      <div className="space-y-2">
-        <p>Transfer to the following account:</p>
-        <div className="bg-muted p-4 rounded">
-          <p><strong>Bank:</strong> BCA</p>
-          <p><strong>Account Number:</strong> 1234567890</p>
-          <p><strong>Account Name:</strong> PT Lumino Digital</p>
-        </div>
-      </div>
-    ),
-    ewallet: (
-      <div className="space-y-2">
-        <p>Scan the QR code below with your e-wallet app:</p>
-        <img src="/qrcode-example.png" alt="QR Code" className="w-40 h-40" />
-        <p className="text-sm text-muted-foreground">Supports OVO, GoPay, and DANA</p>
-      </div>
-    ),
-    card: (
-      <div className="space-y-2">
-        <p>Proceed to secure payment gateway for card processing.</p>
-        <Button disabled className="opacity-60">Redirecting to Stripe...</Button>
-      </div>
-    ),
-  }
-
-  if (!isAuthenticated) return <Navigate to="/login" />
-
-  return (
-    <section className="min-h-screen bg-background text-foreground py-20 px-6">
-      <div className="max-w-2xl mx-auto space-y-10">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold">🛒 Complete Your Order</h2>
-          <p className="text-muted-foreground mt-2">
-            {submitted ? "Please follow the instructions to complete your payment." :
-              "Review product details and fill your information to continue."}
-          </p>
-        </div>
-
-        {/* Produk */}
-        <div className="flex gap-4 items-center p-4 border rounded-xl bg-muted/30 shadow">
-          <img src={product.image} alt={product.title} className="w-20 h-20 object-cover rounded" />
-          <div>
-            <h3 className="text-lg font-semibold">{product.title}</h3>
-            <p className="text-primary font-medium">${product.price}</p>
-          </div>
-        </div>
-
-        {!submitted ? (
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            {/* Platform Name */}
-            <div className="space-y-2">
-              <Label htmlFor="platform">Platform Name</Label>
-              <Input id="platform" required placeholder="Your platform name" />
-            </div>
-            
-            {/* Catatan */}
-            <div className="space-y-2">
-              <Label htmlFor="notes">Additional Notes (optional)</Label>
-              <Textarea id="notes" placeholder="Write any special requests here..." />
-            </div>
-
-            {/* Metode Pembayaran */}
-            <div className="space-y-2">
-              <Label>Payment Method</Label>
-              <RadioGroup
-                value={paymentMethod}
-                onValueChange={setPaymentMethod}
-                className="space-y-2"
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="bank" id="bank" />
-                  <Label htmlFor="bank">Bank Transfer</Label>
+    return (
+        <div className='min-h-screen w-full flex flex-col items-center p-res-xxl py-20'>
+            <h1 className='text-2xl font-bold text-green-600'>Payment successful</h1>
+            <div className="flex items-center gap-4 max-w-md w-full p-2 rounded-lg border shadow-md my-2">
+                <img src={product?.image} alt="" className="aspect-[3/2] rounded-lg object-cover w-20" />
+                <div className="flex flex-col w-full">
+                    <h2 className='text-lg font-semibold'>{product?.title}</h2>
+                    <span className='text-xl text-primary'>${product?.price}</span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="ewallet" id="ewallet" />
-                  <Label htmlFor="ewallet">E-Wallet (OVO, GoPay, DANA)</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="card" id="card" />
-                  <Label htmlFor="card">Credit / Debit Card</Label>
-                </div>
-              </RadioGroup>
             </div>
+            <p>Please fill in the last step to complete the order.</p>
 
-            <Button type="submit" className="w-full">Submit Order</Button>
-          </form>
-        ) : (
-          <div className="p-6 bg-muted rounded-xl shadow space-y-4">
-            <h3 className="text-xl font-semibold">💳 Payment Instructions</h3>
-            {paymentDetails[paymentMethod as keyof typeof paymentDetails]}
-            <p className="text-sm text-muted-foreground pt-2">
-              After completing the payment, a confirmation email will be sent.
-            </p>
-          </div>
-        )}
-      </div>
-    </section>
-  )
+            <Tabs
+                value={tabValue}
+                onValueChange={(val) => {
+                    if (!isSubmitted) setTabValue(val)
+                }}
+                className="w-full max-w-md mt-4"
+            >
+                <TabsList className="w-full">
+                    <TabsTrigger value="form" disabled={isSubmitted}>
+                        Fill out the form
+                    </TabsTrigger>
+                    <TabsTrigger value="design" disabled={isSubmitted}>
+                        Design yourself in Figma
+                    </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="form">
+                    <Card className="bg-background">
+                        <CardHeader>
+                            <CardTitle>Website</CardTitle>
+                            <CardDescription>Customize your website</CardDescription>
+                        </CardHeader>
+                        <CardContent className="grid gap-4">
+                            <div className="grid gap-2">
+                                <Label htmlFor="website-name">Website Name</Label>
+                                <Input id="website-name" placeholder="e.g. Lumino Store" />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="website-description">Description</Label>
+                                <Textarea id="website-description" placeholder="A modern e-commerce website with AI integration." />
+                            </div>
+                        </CardContent>
+                        <CardFooter>
+                            <Button className="w-full" onClick={handleOrderSubmit}>
+                                Send Order
+                            </Button>
+                        </CardFooter>
+                    </Card>
+                </TabsContent>
+
+                <TabsContent value="design">
+                    <Card className="bg-background">
+                        <CardHeader>
+                            <CardTitle>Customize</CardTitle>
+                            <CardDescription>Customize your website in Figma</CardDescription>
+                        </CardHeader>
+                        <CardContent className="grid gap-4">
+                            <Button className="w-full">Design in Figma</Button>
+                        </CardContent>
+                    </Card>
+                </TabsContent>
+
+                <TabsContent value="success">
+                    <Card className="bg-green-100 border border-green-300">
+                        <CardHeader>
+                            <CardTitle className="text-green-700">Order Sent!</CardTitle>
+                            <CardDescription className="text-green-600">
+                                Thank you! Your order has been successfully submitted. Our team will contact you soon.
+                            </CardDescription>
+                        </CardHeader>
+                    </Card>
+                </TabsContent>
+            </Tabs>
+        </div>
+    )
 }
+
+export default ProductOrderPage

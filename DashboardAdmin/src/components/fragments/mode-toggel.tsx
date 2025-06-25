@@ -11,6 +11,7 @@ export function ModeToggle() {
             variant="outline"
             size="icon"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="rounded-full"
         >
             {theme === "dark" ? <Sun /> : <Moon />}
             <span className="sr-only">Toggle Theme</span>

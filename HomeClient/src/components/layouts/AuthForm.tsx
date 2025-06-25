@@ -35,7 +35,7 @@ export const AuthForm = ({ handleSubmit, children, title }: AuthFormProps) => {
                 </div>
                 <div className="md:w-1/2 w-full h-full flex flex-col gap-4 items-center justify-center px-res-xxl">
                     <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">{title}</h1>
-                    <form autoComplete="on" onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
+                    <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
                         {children}
                     </form>
                 </div>
@@ -60,7 +60,7 @@ export const InputFormAuth = ({ type, label, onChange, error }: InputFormAuthPro
                 <input
                     onChange={onChange}
                     name={type}
-                    type={type === "password" && !showPassword ? "password" : type}
+                    type={type === "password" && !showPassword ? "text" : type}
                     className="block px-3.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     placeholder=" "
                     autoComplete={

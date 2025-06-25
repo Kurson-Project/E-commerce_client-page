@@ -1,0 +1,638 @@
+[
+  {
+    "id": "prod_01H8X5K3F9P2T7W6V4QJN9M0L",
+    "title": "Modern Portfolio Template",
+    "image": "https://www.unsell.design/wp-content/uploads/2022/02/553e0bb4-featured-image.jpg",
+    "price": 29,
+    "category": "Website Templates",
+    "description": "A sleek, responsive portfolio template designed for creative professionals...",
+    "features": [
+      "5 pre-designed page layouts (Home, Projects, About, Contact, Blog)",
+      "CMS integration for Sanity/Contentful",
+      "GSAP animations for project galleries",
+      "Dark/light mode toggle with localStorage persistence",
+      "SEO-optimized with Next.js static generation",
+      "95+ Lighthouse performance score out-of-the-box",
+      "Contact form with reCAPTCHA and email.js integration",
+      "Responsive navigation with mobile hamburger menu",
+      "Accessibility compliant (WCAG 2.1 AA)",
+      "Easy customization via Tailwind config"
+    ],
+    "tools": [
+      {
+        "name": "Next.js",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/nextdotjs.svg"
+      },
+      {
+        "name": "Tailwind CSS",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/tailwindcss.svg"
+      }
+    ],
+    "rating": 4.8,
+    "sales": 1243,
+    "status": "Active",
+    "createdAt": "2022-10-15T08:23:42Z",
+    "updatedAt": "2023-06-20T14:12:35Z",
+    "revenue": 36047,
+    "reviews": [
+      {
+        "user": "DesignFreak23",
+        "rating": 5,
+        "date": "2023-05-15"
+      },
+      {
+        "user": "WebDevNewbie",
+        "rating": 4,
+        "date": "2023-04-22"
+      },
+      {
+        "user": "CreativePro",
+        "rating": 5,
+        "date": "2023-06-10"
+      }
+    ]
+  },
+  {
+    "id": "prod_02H8X5K3F9P2T7W6V4QJN9M0L",
+    "title": "Landing Page Startup",
+    "image": "https://uizard.io/static/473c0ece225095e27a09412d4f1ef938/a8e47/84f89a5abe3a18d4d3c5c672f00e76ce2943f0ca-1440x835.png",
+    "price": 35,
+    "category": "Website Templates",
+    "description": "High-conversion landing page template specifically designed for startups and SaaS businesses...",
+    "features": [
+      "3 color schemes (Light, Dark, Gradient)",
+      "Sticky navigation with CTA emphasis",
+      "Animated statistics counters with Intersection Observer",
+      "Testimonial carousel with autoplay/pause controls",
+      "Pricing table with toggle between monthly/annual plans",
+      "Mailchimp/Aweber newsletter integration",
+      "Social proof section with client logos",
+      "Built-in lead capture form validation",
+      "500ms load time optimization",
+      "Hotjar analytics integration points"
+    ],
+    "tools": [
+      {
+        "name": "HTML5",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/html5.svg"
+      },
+      {
+        "name": "Bootstrap",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/bootstrap.svg"
+      }
+    ],
+    "rating": 4.6,
+    "sales": 876,
+    "status": "Active",
+    "createdAt": "2022-11-03T12:45:18Z",
+    "updatedAt": "2023-06-18T09:27:53Z",
+    "revenue": 30660,
+    "reviews": [
+      {
+        "user": "StartupFounder",
+        "rating": 5,
+        "date": "2023-03-18"
+      },
+      {
+        "user": "MarketingGuru",
+        "rating": 4,
+        "date": "2023-02-05"
+      },
+      {
+        "user": "SaaSDeveloper",
+        "rating": 5,
+        "date": "2023-04-30"
+      }
+    ]
+  },
+  {
+    "id": "prod_03H8X5K3F9P2T7W6V4QJN9M0L",
+    "title": "E-Commerce UI Kit",
+    "image": "https://figma-free.com/wp-content/uploads/2023/07/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA.png",
+    "price": 45,
+    "category": "Website Templates",
+    "description": "Complete e-commerce interface package with 50+ customizable components including product cards...",
+    "features": [
+      "50+ customizable React components",
+      "Product quick-view modal with image zoom",
+      "Inventory level indicators (In stock/Low stock/Out of stock)",
+      "Size/color selector with visual swatches",
+      "Shopping cart drawer with promo code support",
+      "Checkout process (3-step flow)",
+      "Wishlist functionality with localStorage",
+      "Product filtering by price/attributes/ratings",
+      "Shopify/WordPress integration examples",
+      "AR product preview placeholder"
+    ],
+    "tools": [
+      {
+        "name": "React",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/react.svg"
+      },
+      {
+        "name": "SCSS",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/sass.svg"
+      }
+    ],
+    "rating": 4.9,
+    "sales": 2105,
+    "status": "Active",
+    "createdAt": "2022-09-22T15:37:09Z",
+    "updatedAt": "2023-06-22T11:45:12Z",
+    "revenue": 94725,
+    "reviews": [
+      {
+        "user": "ShopOwner",
+        "rating": 5,
+        "date": "2023-06-25"
+      },
+      {
+        "user": "FrontendDev",
+        "rating": 5,
+        "date": "2023-05-12"
+      },
+      {
+        "user": "EcomNewbie",
+        "rating": 4,
+        "date": "2023-04-03"
+      }
+    ]
+  },
+  {
+    "id": "prod_04H8X5K3F9P2T7W6V4QJN9M0L",
+    "title": "Minimal Blog Template",
+    "image": "https://freebiesbug.com/wp-content/uploads/2016/03/minimo-psd-blog-template.jpg",
+    "price": 22,
+    "category": "Website Templates",
+    "description": "Elegant, content-focused blog template with typography-first design principles...",
+    "features": [
+      "Syntax highlighting for 20+ programming languages",
+      "Newsletter subscription with Mailchimp API",
+      "Author profile cards with social links",
+      "Related posts algorithm based on tags",
+      "Dark/light theme with system preference detection",
+      "Responsive image handling (srcset/picture)",
+      "Reading time estimates for articles",
+      "Table of contents auto-generation",
+      "SEO-friendly markup with JSON-LD",
+      "Disqus/Staticman comment options"
+    ],
+    "tools": [
+      {
+        "name": "Jekyll",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/jekyll.svg"
+      },
+      {
+        "name": "Markdown",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/markdown.svg"
+      }
+    ],
+    "rating": 4.7,
+    "sales": 542,
+    "status": "Draft",
+    "createdAt": "2023-01-14T10:12:45Z",
+    "updatedAt": "2023-06-15T16:38:27Z",
+    "revenue": 11924,
+    "reviews": [
+      {
+        "user": "TechWriter",
+        "rating": 5,
+        "date": "2023-03-22"
+      },
+      {
+        "user": "ContentCreator",
+        "rating": 5,
+        "date": "2023-05-18"
+      },
+      {
+        "user": "DeveloperBlogger",
+        "rating": 4,
+        "date": "2023-04-05"
+      }
+    ]
+  },
+  {
+    "id": "prod_05H8X5K3F9P2T7W6V4QJN9M0L",
+    "title": "Admin Dashboard Template",
+    "image": "https://colorlib.com/wp/wp-content/uploads/sites/2/architectui-free-admin-dashboard.jpg",
+    "price": 49,
+    "category": "Website Templates",
+    "description": "Comprehensive admin dashboard with 30+ widget components, data visualization charts...",
+    "features": [
+      "30+ customizable Vue components",
+      "Role-based access control templates",
+      "Real-time notification system",
+      "CRUD interfaces with form validation",
+      "10 pre-built page templates",
+      "Dark/light mode with theme persistence",
+      "i18n support with 5 language examples",
+      "Chart.js integration with 8 chart types",
+      "JWT authentication flow examples",
+      "Detailed API integration guides"
+    ],
+    "tools": [
+      {
+        "name": "Vue.js",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/vuedotjs.svg"
+      },
+      {
+        "name": "Vuetify",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/vuetify.svg"
+      }
+    ],
+    "rating": 4.8,
+    "sales": 987,
+    "status": "Active",
+    "createdAt": "2022-12-05T09:18:33Z",
+    "updatedAt": "2023-06-19T13:42:51Z",
+    "revenue": 48363,
+    "reviews": [
+      {
+        "user": "SystemAdmin",
+        "rating": 5,
+        "date": "2023-06-15"
+      },
+      {
+        "user": "FullStackDev",
+        "rating": 5,
+        "date": "2023-05-28"
+      },
+      {
+        "user": "ProductManager",
+        "rating": 4,
+        "date": "2023-04-12"
+      }
+    ]
+  },
+  {
+    "id": "prod_06H8X5K3F9P2T7W6V4QJN9M0L",
+    "title": "SaaS Landing Template",
+    "image": "https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/website-templates/Tailwind%20CSS%20SaaS%20Landing%20Page.png",
+    "price": 39,
+    "category": "Website Templates",
+    "description": "Conversion-optimized landing template for SaaS products with feature highlights...",
+    "features": [
+      "Modular section architecture (drag-and-drop friendly)",
+      "Interactive product tour with Shepherd.js",
+      "Live chat UI with mock message flow",
+      "Pricing table with annual/monthly toggle",
+      "Customer testimonial carousel",
+      "Google Analytics/GTM integration",
+      "5 professionally designed color schemes",
+      "GDPR-compliant cookie consent",
+      "Next.js API route examples",
+      "A/B testing ready structure"
+    ],
+    "tools": [
+      {
+        "name": "Gatsby",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/gatsby.svg"
+      },
+      {
+        "name": "GraphQL",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/graphql.svg"
+      }
+    ],
+    "rating": 4.7,
+    "sales": 765,
+    "status": "Archived",
+    "createdAt": "2022-08-30T14:27:56Z",
+    "updatedAt": "2023-05-10T11:15:42Z",
+    "revenue": 29835,
+    "reviews": [
+      {
+        "user": "SaaSFounder",
+        "rating": 5,
+        "date": "2023-05-20"
+      },
+      {
+        "user": "MarketingDirector",
+        "rating": 5,
+        "date": "2023-04-08"
+      },
+      {
+        "user": "WebDesigner",
+        "rating": 4,
+        "date": "2023-03-15"
+      }
+    ]
+  },
+  {
+    "id": "prod_07H8X5K3F9P2T7W6V4QJN9M0L",
+    "title": "Neural OS Interface",
+    "image": "https://www.unsell.design/wp-content/uploads/2022/02/553e0bb4-featured-image.jpg",
+    "price": 65,
+    "category": "AI Agents",
+    "description": "Cutting-edge interface for neural network operating systems featuring real-time neural activity visualization...",
+    "features": [
+      "Real-time neural activity heatmaps",
+      "Model architecture node editor (drag-and-drop)",
+      "Training progress dashboard (loss/accuracy graphs)",
+      "Hyperparameter tuning interface with sliders/ranges",
+      "Dataset visualization tools (t-SNE/PCA projections)",
+      "PyTorch/TensorFlow integration hooks",
+      "Experiment comparison views (A/B testing)",
+      "Model export options (ONNX, TorchScript)",
+      "Research paper citation generator",
+      "Collaboration annotation system"
+    ],
+    "tools": [
+      {
+        "name": "Python",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/python.svg"
+      },
+      {
+        "name": "PyTorch",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/pytorch.svg"
+      }
+    ],
+    "rating": 4.9,
+    "sales": 432,
+    "status": "Active",
+    "createdAt": "2023-02-18T16:45:22Z",
+    "updatedAt": "2023-06-25T10:33:17Z",
+    "revenue": 28080,
+    "reviews": [
+      {
+        "user": "MLResearcher",
+        "rating": 5,
+        "date": "2023-06-28"
+      },
+      {
+        "user": "DataScientist",
+        "rating": 5,
+        "date": "2023-05-17"
+      },
+      {
+        "user": "AIDeveloper",
+        "rating": 4,
+        "date": "2023-04-23"
+      }
+    ]
+  },
+  {
+    "id": "prod_08H8X5K3F9P2T7W6V4QJN9M0L",
+    "title": "Smart Assistant UI",
+    "image": "https://www.unsell.design/wp-content/uploads/2022/02/553e0bb4-featured-image.jpg",
+    "price": 58,
+    "category": "AI Agents",
+    "description": "Voice and text-based smart assistant interface with conversational UI components...",
+    "features": [
+      "Multi-modal input (voice typing, text, touch)",
+      "Conversation history with search/filter",
+      "Intent visualization with confidence scores",
+      "Context-aware follow-up suggestions",
+      "Speech waveform visualization",
+      "Plugin architecture for skill extensions",
+      "Accessibility modes (high contrast, text-only)",
+      "Real-time translation indicators",
+      "5 personality theme packs",
+      "NLP API integration points"
+    ],
+    "tools": [
+      {
+        "name": "JavaScript",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/javascript.svg"
+      },
+      {
+        "name": "TensorFlow.js",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/tensorflow.svg"
+      }
+    ],
+    "rating": 4.7,
+    "sales": 389,
+    "status": "Draft",
+    "createdAt": "2023-03-12T11:27:38Z",
+    "updatedAt": "2023-06-15T14:56:43Z",
+    "revenue": 22562,
+    "reviews": [
+      {
+        "user": "ProductDesigner",
+        "rating": 5,
+        "date": "2023-06-12"
+      },
+      {
+        "user": "UXResearcher",
+        "rating": 5,
+        "date": "2023-05-05"
+      },
+      {
+        "user": "ChatbotDev",
+        "rating": 4,
+        "date": "2023-04-18"
+      }
+    ]
+  },
+  {
+    "id": "prod_09H8X5K3F9P2T7W6V4QJN9M0L",
+    "title": "AI UX Dashboard",
+    "image": "https://www.unsell.design/wp-content/uploads/2022/02/553e0bb4-featured-image.jpg",
+    "price": 72,
+    "category": "AI Agents",
+    "description": "Comprehensive dashboard for monitoring and interacting with AI systems...",
+    "features": [
+      "Model performance tracking (precision/recall/F1)",
+      "Data drift detection alerts",
+      "Prediction analysis with confidence intervals",
+      "Explainable AI feature importance charts",
+      "Real-time data streaming display",
+      "Team annotation and feedback system",
+      "Role-based view customization",
+      "Automated report generation",
+      "Model version comparison tools",
+      "Audit logging for compliance"
+    ],
+    "tools": [
+      {
+        "name": "TypeScript",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/typescript.svg"
+      },
+      {
+        "name": "Next.js",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/nextdotjs.svg"
+      }
+    ],
+    "rating": 4.8,
+    "sales": 521,
+    "status": "Active",
+    "createdAt": "2023-01-25T13:42:19Z",
+    "updatedAt": "2023-06-22T08:15:36Z",
+    "revenue": 37512,
+    "reviews": [
+      {
+        "user": "DataScienceLead",
+        "rating": 5,
+        "date": "2023-06-22"
+      },
+      {
+        "user": "AIManager",
+        "rating": 5,
+        "date": "2023-05-30"
+      },
+      {
+        "user": "MLOpsEngineer",
+        "rating": 4,
+        "date": "2023-04-14"
+      }
+    ]
+  },
+  {
+    "id": "prod_10H8X5K3F9P2T7W6V4QJN9M0L",
+    "title": "VoiceOS Layout Kit",
+    "image": "https://www.unsell.design/wp-content/uploads/2022/02/553e0bb4-featured-image.jpg",
+    "price": 64,
+    "category": "AI Agents",
+    "description": "Multi-platform voice operating system interface components for building conversational applications...",
+    "features": [
+      "Cross-platform Flutter components (iOS/Android/Web)",
+      "Voice waveform visualization",
+      "Intent confirmation dialogs",
+      "Multi-step conversation flows",
+      "Screen reader compatibility",
+      "Firebase real-time sync",
+      "8 conversation pattern templates",
+      "Voice API integration guides",
+      "Testing simulator with voice recording",
+      "Emotion/tonality indicators"
+    ],
+    "tools": [
+      {
+        "name": "Flutter",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/flutter.svg"
+      },
+      {
+        "name": "Firebase",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/firebase.svg"
+      }
+    ],
+    "rating": 4.6,
+    "sales": 287,
+    "status": "Draft",
+    "createdAt": "2023-04-05T10:15:42Z",
+    "updatedAt": "2023-06-18T12:33:27Z",
+    "revenue": 18368,
+    "reviews": [
+      {
+        "user": "MobileDev",
+        "rating": 5,
+        "date": "2023-06-18"
+      },
+      {
+        "user": "AccessibilityExpert",
+        "rating": 5,
+        "date": "2023-05-09"
+      },
+      {
+        "user": "ProductOwner",
+        "rating": 4,
+        "date": "2023-04-27"
+      }
+    ]
+  },
+  {
+    "id": "prod_11H8X5K3F9P2T7W6V4QJN9M0L",
+    "title": "Artificial Agent Template",
+    "image": "https://www.unsell.design/wp-content/uploads/2022/02/553e0bb4-featured-image.jpg",
+    "price": 71,
+    "category": "AI Agents",
+    "description": "Modular interface framework for building artificial agent applications with personality customization...",
+    "features": [
+      "Personality customization system",
+      "Emotion state visualization",
+      "Memory recall interfaces",
+      "Multi-channel interaction (text/voice/AR)",
+      "Task management dashboard",
+      "gRPC microservice architecture",
+      "5 pre-built personality profiles",
+      "Knowledge base connector API",
+      "Behavior simulation sandbox",
+      "Conversation history analysis"
+    ],
+    "tools": [
+      {
+        "name": "Go",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/go.svg"
+      },
+      {
+        "name": "gRPC",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/grpc.svg"
+      }
+    ],
+    "rating": 4.7,
+    "sales": 354,
+    "status": "Active",
+    "createdAt": "2023-03-28T09:42:15Z",
+    "updatedAt": "2023-06-30T15:22:48Z",
+    "revenue": 25134,
+    "reviews": [
+      {
+        "user": "AIDesigner",
+        "rating": 5,
+        "date": "2023-06-30"
+      },
+      {
+        "user": "BackendArchitect",
+        "rating": 5,
+        "date": "2023-05-24"
+      },
+      {
+        "user": "UXResearcher",
+        "rating": 4,
+        "date": "2023-04-16"
+      }
+    ]
+  },
+  {
+    "id": "prod_12H8X5K3F9P2T7W6V4QJN9M0L",
+    "title": "AI Agents UI",
+    "image": "https://www.unsell.design/wp-content/uploads/2022/02/553e0bb4-featured-image.jpg",
+    "price": 59,
+    "category": "AI Agents",
+    "description": "Foundation UI kit for AI-powered operating systems featuring adaptive interfaces...",
+    "features": [
+      "Adaptive interface framework",
+      "Context-aware component system",
+      "Skill marketplace UI templates",
+      "Permission management dashboard",
+      "AI-to-AI collaboration interfaces",
+      "TensorFlow model serving UI",
+      "Progressive disclosure patterns",
+      "Onboarding flow templates",
+      "3 complete application templates",
+      "Design system style guide"
+    ],
+    "tools": [
+      {
+        "name": "Python",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/python.svg"
+      },
+      {
+        "name": "TensorFlow",
+        "icon": "https://unpkg.com/simple-icons@latest/icons/tensorflow.svg"
+      }
+    ],
+    "rating": 4.5,
+    "sales": 412,
+    "status": "Archived",
+    "createdAt": "2022-12-20T14:36:29Z",
+    "updatedAt": "2023-05-22T10:18:54Z",
+    "revenue": 24308,
+    "reviews": [
+      {
+        "user": "OSDeveloper",
+        "rating": 5,
+        "date": "2023-06-25"
+      },
+      {
+        "user": "MLEngineer",
+        "rating": 5,
+        "date": "2023-05-11"
+      },
+      {
+        "user": "ProductManager",
+        "rating": 4,
+        "date": "2023-04-03"
+      }
+    ]
+  }
+]

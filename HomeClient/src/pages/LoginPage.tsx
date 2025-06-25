@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Link, Navigate } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import { AuthForm, InputFormAuth } from "@/components/layouts/AuthForm"
 import { validateEmail, validatePassword } from "@/components/templates/ValidateForm"
 import { useAuth } from "@/hooks/useAuth"
@@ -9,31 +9,36 @@ const LoginPage = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState({
+        login: "",
         email: "",
         password: ""
     })
 
-    const { login, isAuthenticated } = useAuth()
+    const navigate = useNavigate()
 
-    const dummyUser = {
-        name: "Zaid Rengga",
-        email: email,
-    }
-    const dummyToken = "1234567890abcdef"
+    const { login, isAuthenticated, error: authError, loading } = useAuth()
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (!email) setError({ ...error, email: "Email is required" })
-        else if (!password) setError({ ...error, password: "Password is required" })
+
+        // Validasi
+        if (!email) return setError({ ...error, email: "Email is required" })
+        else if (!password) return setError({ ...error, password: "Password is required" })
         else {
-            login(dummyUser, dummyToken)
+            const isLogin = await login(email, password)
+            if (isLogin) {
+                window.location.reload()
+                navigate("/")
+            } else {
+                setError({ ...error, login: authError.login })
+            }
         }
     }
-
     if (isAuthenticated) return <Navigate to="/" />
 
     return (
         <AuthForm handleSubmit={handleSubmit} title="LOGIN TO YOUR ACCOUNT">
+            {error.login && <p className="text-red-500 text-sm">{error.login}</p>}
             <InputFormAuth
                 type="email"
                 label="Email"
@@ -58,7 +63,7 @@ const LoginPage = () => {
                 <Link to="/forgot-password" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">Forgot password?</Link>
             </div>
             <div className="w-full flex flex-col gap-2">
-                <Button type="submit" className="w-full">Login</Button>
+                <Button type="submit" disabled={loading} className="w-full">{loading ? "Loading..." : "Login"}</Button>
                 <div className="flex items-center">
                     <div className="w-full border-t border-muted-foreground"></div>
                     <span className="px-2 text-sm text-muted-foreground">or</span>

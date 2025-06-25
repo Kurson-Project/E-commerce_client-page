@@ -8,8 +8,10 @@ export interface User {
 
 export interface AuthContextType {
   user: User | null
-  token: string | null
-  login: (userData: User, token: string) => void
+  error: { login: string; register: string; logout: string }
+  loading: boolean
+  login: (email: string, password: string) => Promise<boolean>
+  register: (name: string, email: string, password: string) => Promise<boolean>
   logout: () => void
   isAuthenticated: boolean
 }

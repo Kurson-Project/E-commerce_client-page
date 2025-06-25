@@ -13,10 +13,10 @@ import FaqPage from "./pages/FaqPage"
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage"
 import TermsOfServicePage from "./pages/TermsPage"
 import RegisterPage from "./pages/RegsiterPage"
-import ProductOrderPage from "./pages/ProductOrderPage"
 import ProductCartPage from "./pages/ProductCartPage"
 import ProfilePage from "./pages/ProfilePage"
 import ProductModify from "./pages/ProductModify"
+import ProductOrderPage from "./pages/ProductOrderPage"
 
 const MainLayout = () => {
   return (
@@ -38,12 +38,14 @@ const App = () => {
       <Routes key={location.pathname} location={location}>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
+
           <Route path="/products" element={<ProductPage />} />
           <Route path="/products/:category" element={<ProductPage />} />
           <Route path="/products/details/:id" element={<ProductDetailPage />} />
-          <Route path="/products/order/:id" element={<ProductOrderPage />} />
           <Route path="/products/cart" element={<ProductCartPage />} />
           <Route path="/products/modify/:id" element={<ProductModify />} />
+          <Route path="/products/order/:id" element={<ProductOrderPage />} />
+
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/faq" element={<FaqPage />} />

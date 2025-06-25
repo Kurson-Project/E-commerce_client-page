@@ -1,6 +1,6 @@
 "use client"
 
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
 
 import {
     Card,
@@ -17,41 +17,37 @@ import {
 } from "@/components/ui/chart"
 
 const chartData = [
-    { month: "January", orders: 186 },
-    { month: "February", orders: 305 },
-    { month: "March", orders: 237 },
-    { month: "April", orders: 73 },
-    { month: "May", orders: 209 },
-    { month: "June", orders: 214 },
+    { month: "January", orders: 120 },
+    { month: "February", orders: 180 },
+    { month: "March", orders: 240 },
+    { month: "April", orders: 150 },
+    { month: "May", orders: 310 },
+    { month: "June", orders: 275 },
 ]
+
 
 const chartConfig = {
     orders: {
-        label: "orders",
+        label: "Orders",
         color: "var(--chart-1)",
-    }
+    },
 } satisfies ChartConfig
 
 export function ChartAreaGradient() {
     return (
-        <Card>
+        <Card className="bg-background border shadow-sm">
             <CardHeader>
-                <CardTitle>Area Chart - Gradient</CardTitle>
-                <CardDescription>
-                    Showing total visitors for the last 6 months
+                <CardTitle className="text-lg font-semibold">Monthly Orders Overview</CardTitle>
+                <CardDescription className="text-muted-foreground text-sm">
+                    Track total product orders in the past 6 months.
                 </CardDescription>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig}>
                     <AreaChart
-                        accessibilityLayer
                         data={chartData}
-                        margin={{
-                            left: 12,
-                            right: 12,
-                        }}
                     >
-                        <CartesianGrid vertical={false} />
+                        <CartesianGrid strokeDasharray="3 3" vertical={false} />
                         <XAxis
                             dataKey="month"
                             tickLine={false}
@@ -59,28 +55,26 @@ export function ChartAreaGradient() {
                             tickMargin={8}
                             tickFormatter={(value) => value.slice(0, 3)}
                         />
-                        <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+                        <YAxis
+                            tickLine={false}
+                            axisLine={false}
+                            tickFormatter={(val) => `${val}`}
+                        />
+                        <ChartTooltip content={<ChartTooltipContent />} />
                         <defs>
                             <linearGradient id="fillorders" x1="0" y1="0" x2="0" y2="1">
-                                <stop
-                                    offset="5%"
-                                    stopColor="var(--color-orders)"
-                                    stopOpacity={0.8}
-                                />
-                                <stop
-                                    offset="95%"
-                                    stopColor="var(--color-orders)"
-                                    stopOpacity={0.1}
-                                />
+                                <stop offset="5%" stopColor="var(--color-orders)" stopOpacity={0.7} />
+                                <stop offset="95%" stopColor="var(--color-orders)" stopOpacity={0.1} />
                             </linearGradient>
                         </defs>
                         <Area
+                            type="monotone"
                             dataKey="orders"
-                            type="natural"
-                            fill="url(#fillorders)"
-                            fillOpacity={0.4}
                             stroke="var(--color-orders)"
-                            stackId="a"
+                            fill="url(#fillorders)"
+                            strokeWidth={2}
+                            dot={{ r: 3 }}
+                            activeDot={{ r: 5 }}
                         />
                     </AreaChart>
                 </ChartContainer>

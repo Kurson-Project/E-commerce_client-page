@@ -35,7 +35,7 @@ const AppNavbar = () => {
   const lastScrollY = useRef(0)
   const currentPath = useLocation().pathname
 
-  const { user } = useAuth()
+  const { user, isAuthenticated } = useAuth()
 
   const { cart } = useCart()
   const totalItems = cart.reduce((sum: number, item: CartItem) => sum + item.quantity, 0)
@@ -96,7 +96,7 @@ const AppNavbar = () => {
       </nav>
 
       <div className="flex items-center justify-end gap-2">
-        {user ? (
+        {isAuthenticated ? (
           <>
             <Button variant="outline" size="icon" className="rounded-full" asChild>
               <Link to="/products/cart">
@@ -110,15 +110,17 @@ const AppNavbar = () => {
             </Button>
             <HoverCard>
               <HoverCardTrigger asChild>
-                <Button size="icon" className="rounded-full" >
-                  {user.name?.slice(0, 1).toUpperCase()}
+                <Button size="icon" className="rounded-full" asChild >
+                  <Link to="/profile">
+                    {user?.name?.slice(0, 1).toUpperCase()}
+                  </Link>
                 </Button>
               </HoverCardTrigger>
               <HoverCardContent className="w-80">
                 <div className="flex justify-between items-center">
                   <div className="flex flex-col gap-1">
-                    <h4 className="font-semibold">{user.name}</h4>
-                    <p className="text-sm text-muted-foreground">{user.email}</p>
+                    <h4 className="font-semibold">{user?.name}</h4>
+                    <p className="text-sm text-muted-foreground">{user?.email}</p>
                   </div>
                   <Button asChild><Link to="/profile">Profile</Link></Button>
                 </div>
@@ -182,11 +184,11 @@ const AppNavbar = () => {
               ))}
             </ul>
             <SheetFooter>
-              {user ? (
+              {isAuthenticated ? (
                 <>
                   <div className="flex flex-col border p-2 rounded-lg">
-                    <p className="font-bold">{user.name}</p>
-                    <p className="text-sm">{user.email}</p>
+                    <p className="font-bold">{user?.name}</p>
+                    <p className="text-sm">{user?.email}</p>
                   </div>
                 </>
               ) : (
