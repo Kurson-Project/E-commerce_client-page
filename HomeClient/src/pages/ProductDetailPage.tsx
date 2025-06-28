@@ -22,6 +22,8 @@ import Recording from "../assets/Recording.mp4"
 import useProduct from "@/hooks/useProduct"
 import Loading from "@/components/layouts/Loading"
 import { formatPrice } from "@/lib/format"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
 
 const ProductDetailPage = () => {
     const [userRating, setUserRating] = useState(0);
@@ -138,9 +140,36 @@ const ProductDetailPage = () => {
                                         </p>
                                     </div>
                                 </div>
+                                <div className="space-y-2">
+                                    <Label>Name</Label>
+                                    <Input
+                                        type="text"
+                                        placeholder="Enter your name"
+                                        className="w-full"
+                                        required
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>Email</Label>
+                                    <Input
+                                        type="email"
+                                        placeholder="Enter your email"
+                                        className="w-full"
+                                        required
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>Phone Number</Label>
+                                    <Input
+                                        type="tel"
+                                        placeholder="Enter your phone number"
+                                        className="w-full"
+                                        required
+                                    />
+                                </div>
                                 <AlertDialogFooter>
                                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                    <AlertDialogAction onClick={handlePayment} >Buy Now</AlertDialogAction>
+                                    <AlertDialogAction onClick={handlePayment} >Send Order</AlertDialogAction>
                                 </AlertDialogFooter>
                             </AlertDialogContent>
                         </AlertDialog>
