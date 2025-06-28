@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -13,47 +13,30 @@ import {
     Eye,
     Share2,
     MessageSquare,
-    DollarSign,
     Package,
 } from 'lucide-react';
-import {
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    ResponsiveContainer,
-    AreaChart,
-    Area
-} from 'recharts';
-
-import productsJson from '../data/product.json';
-import type { Product } from '@/hooks/useProduct';
+import { useProduct } from '@/hooks/useProduct';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
-
-// Mock sales data
-const salesData = [
-    { month: 'Jan', sales: 12, revenue: 348 },
-    { month: 'Feb', sales: 19, revenue: 551 },
-    { month: 'Mar', sales: 15, revenue: 435 },
-    { month: 'Apr', sales: 22, revenue: 638 },
-    { month: 'May', sales: 18, revenue: 522 },
-    { month: 'Jun', sales: 25, revenue: 725 },
-    { month: 'Jul', sales: 34, revenue: 986 }
-];
 
 export default function ProductDetail() {
     const { id } = useParams();
     const [activeTab, setActiveTab] = useState('overview');
-    const [productData, setProductData] = useState<Product>();
 
-    useEffect(() => {
-        const product = productsJson.find((product) => product.id.toString() === id);
-        if (product) {
-            setProductData(product);
-        }
-    }, [productData, id]);
+    const { products, loading } = useProduct()
+
+    const productData = products?.find((product) => product.id === id);
+
+    if (!productData) {
+        return <div>Prodcuct Not Found</div>;
+    }
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
 
     const renderStars = (rating: number) => {
+        if (!rating) return null; // add null check for rating
         return Array.from({ length: 5 }, (_, i) => (
             <Star
                 key={i}
@@ -66,10 +49,6 @@ export default function ProductDetail() {
             />
         ));
     };
-
-    if (!productData) {
-        return <div>Loading...</div>;
-    }
 
     return (
         <div className="space-y-6 md:p-0 p-2">
@@ -97,7 +76,7 @@ export default function ProductDetail() {
                     <div>
                         <h1 className="text-3xl font-bold text-primary">{productData?.title}</h1>
                         <div className="flex items-center space-x-4 mt-2">
-                            <Badge className={productData?.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}>
+                            <Badge className={productData?.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}>
                                 {productData?.status}
                             </Badge>
                             <span className="text-muted-foreground">ID: #{productData?.id}</span>
@@ -142,18 +121,6 @@ export default function ProductDetail() {
                     <CardContent className="p-6">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm font-medium text-muted-foreground">Revenue</p>
-                                <p className="text-2xl font-bold text-foreground">${productData?.revenue}</p>
-                            </div>
-                            <DollarSign className="h-8 w-8 text-green-600" />
-                        </div>
-                    </CardContent>
-                </Card>
-
-                <Card>
-                    <CardContent className="p-6">
-                        <div className="flex items-center justify-between">
-                            <div>
                                 <p className="text-sm font-medium text-muted-foreground">Rating</p>
                                 <div className="flex items-center space-x-2">
                                     <p className="text-2xl font-bold text-foreground">{productData?.rating}</p>
@@ -172,7 +139,7 @@ export default function ProductDetail() {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-sm font-medium text-muted-foreground">Reviews</p>
-                                <p className="text-2xl font-bold text-foreground">{productData?.reviews.length}</p>
+                                {/* <p className="text-2xl font-bold text-foreground">{productData?.reviews.length}</p> */}
                             </div>
                             <MessageSquare className="h-8 w-8 text-purple-600" />
                         </div>
@@ -184,9 +151,8 @@ export default function ProductDetail() {
                 {/* Main Content */}
                 <div className="lg:col-span-2">
                     <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-                        <TabsList className="grid w-full grid-cols-4">
+                        <TabsList className="w-full">
                             <TabsTrigger value="overview">Overview</TabsTrigger>
-                            <TabsTrigger value="analytics">Analytics</TabsTrigger>
                             <TabsTrigger value="reviews">Reviews</TabsTrigger>
                             <TabsTrigger value="files">Files</TabsTrigger>
                         </TabsList>
@@ -234,91 +200,15 @@ export default function ProductDetail() {
                             </Card>
                         </TabsContent>
 
-                        <TabsContent value="analytics" className="space-y-6">
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle>Sales Performance</CardTitle>
-                                    <CardDescription>Monthly sales and revenue trends</CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <ResponsiveContainer width="100%" height={300}>
-                                        <AreaChart data={salesData}>
-                                            <CartesianGrid strokeDasharray="3 3" />
-                                            <XAxis dataKey="month" />
-                                            <YAxis />
-                                            <Tooltip />
-                                            <Area
-                                                type="monotone"
-                                                dataKey="sales"
-                                                stroke="#3B82F6"
-                                                fill="#3B82F6"
-                                                fillOpacity={0.1}
-                                            />
-                                        </AreaChart>
-                                    </ResponsiveContainer>
-                                </CardContent>
-                            </Card>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <Card>
-                                    <CardHeader>
-                                        <CardTitle>Performance Metrics</CardTitle>
-                                    </CardHeader>
-                                    <CardContent className="space-y-4">
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-muted-foreground">Conversion Rate</span>
-                                            <span className="font-semibold">3.2%</span>
-                                        </div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-muted-foreground">Avg. Order Value</span>
-                                            <span className="font-semibold">${productData?.price}</span>
-                                        </div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-muted-foreground">Return Rate</span>
-                                            <span className="font-semibold">1.2%</span>
-                                        </div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-muted-foreground">Customer Satisfaction</span>
-                                            <span className="font-semibold">96%</span>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-
-                                <Card>
-                                    <CardHeader>
-                                        <CardTitle>Top Referrers</CardTitle>
-                                    </CardHeader>
-                                    <CardContent className="space-y-4">
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-muted-foreground">Direct Traffic</span>
-                                            <span className="font-semibold">45%</span>
-                                        </div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-muted-foreground">Google Search</span>
-                                            <span className="font-semibold">32%</span>
-                                        </div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-muted-foreground">Social Media</span>
-                                            <span className="font-semibold">15%</span>
-                                        </div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-muted-foreground">Email Campaign</span>
-                                            <span className="font-semibold">8%</span>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            </div>
-                        </TabsContent>
-
                         <TabsContent value="reviews" className="space-y-6">
                             <Card>
                                 <CardHeader>
                                     <CardTitle>Customer Reviews</CardTitle>
                                     <CardDescription>
-                                        {productData.reviews.length} reviews • Average rating: {productData.rating}/5
+                                        {/* {productData.reviews.length} reviews • Average rating: {productData.rating}/5 */}
                                     </CardDescription>
                                 </CardHeader>
-                                <CardContent className="space-y-6">
+                                {/* <CardContent className="space-y-6">
                                     {productData.reviews.map((review) => (
                                         <div key={review.user} className="border-b pb-6 last:border-b-0">
                                             <div className="flex items-start space-x-4">
@@ -344,7 +234,7 @@ export default function ProductDetail() {
                                             </div>
                                         </div>
                                     ))}
-                                </CardContent>
+                                </CardContent> */}
                             </Card>
                         </TabsContent>
 
@@ -454,7 +344,7 @@ export default function ProductDetail() {
                             </div>
                             <div className="flex justify-between">
                                 <span className="text-muted-foreground">Status</span>
-                                <Badge className={productData.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}>
+                                <Badge className={productData.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}>
                                     {productData.status}
                                 </Badge>
                             </div>

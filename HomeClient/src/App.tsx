@@ -2,7 +2,7 @@ import { Outlet, Route, Routes, useLocation } from "react-router-dom"
 import AppNavbar from "./components/layouts/AppNavbar"
 import HomePage from "./pages/HomePage"
 import AppFooter from "./components/layouts/AppFooter"
-import LoginPage from "./pages/LoginPage"
+import LoginPage, { LoginGoogleCallback } from "./pages/LoginPage"
 import ProductPage from "./pages/ProductPage"
 import InnerAnimation from "./components/templates/animated/InnerAnimated"
 import { AnimatePresence } from "framer-motion"
@@ -17,6 +17,7 @@ import ProductCartPage from "./pages/ProductCartPage"
 import ProfilePage from "./pages/ProfilePage"
 import ProductModify from "./pages/ProductModify"
 import ProductOrderPage from "./pages/ProductOrderPage"
+import { useEffect } from "react"
 
 const MainLayout = () => {
   return (
@@ -32,6 +33,12 @@ const MainLayout = () => {
 
 const App = () => {
   const location = useLocation()
+
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }, 200)
+  }, [location.pathname])
 
   return (
     <AnimatePresence mode="wait">
@@ -58,6 +65,7 @@ const App = () => {
 
         <Route path="/login" element={<InnerAnimation><LoginPage /></InnerAnimation>} />
         <Route path="/register" element={<InnerAnimation><RegisterPage /></InnerAnimation>} />
+        <Route path="/login/google" element={<LoginGoogleCallback />} />
       </Routes>
     </AnimatePresence>
   )

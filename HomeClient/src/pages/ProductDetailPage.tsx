@@ -11,23 +11,34 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import DataProduct from "@/data/product.json"
 import CardProduk from "@/components/templates/card/CardProduk"
 import { ArrowRight } from "lucide-react"
 import { useCart } from "@/hooks/useCartProduct"
 import { StarRating, StarRatingInput } from "@/components/ui/star-rating"
 import { useState } from "react"
 import { Badge } from "@/components/ui/badge"
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+import Recording from "../assets/Recording.mp4"
+import useProduct from "@/hooks/useProduct"
+import Loading from "@/components/layouts/Loading"
+import { formatPrice } from "@/lib/format"
 
 const ProductDetailPage = () => {
     const [userRating, setUserRating] = useState(0);
 
+    const { payment, products, loading } = useProduct()
     const { id } = useParams();
-    const product = DataProduct.find((item) => item.title === id)
+    const product = products.find((item) => item.title === id)
 
-    const Rekomendation = DataProduct.filter((item) => item.category === product?.category).slice(0, 2);
+    const Rekomendation = products.filter((item) => item.category === product?.category).slice(0, 2);
 
     const { addToCart, cart } = useCart();
+
+    const handlePayment = async () => {
+        await payment({ id: product?.id || "" });
+    };
+
+    if (loading) return <Loading />
 
     if (!product) return <div className="p-8 text-center text-destructive">Product not found</div>
 
@@ -38,13 +49,33 @@ const ProductDetailPage = () => {
         >
             <section className="flex md:flex-row flex-col gap-10">
                 {/* Gambar Produk */}
-                <div className="w-full rounded-2xl overflow-hidden shadow-lg">
-                    <img
-                        src={product.image}
-                        alt={`Product image of ${product.title}`}
-                        className="w-full h-full object-cover"
-                    />
-                </div>
+                <Carousel className="w-full">
+                    <CarouselContent>
+                        <CarouselItem>
+                            <div className="w-full rounded-2xl overflow-hidden border">
+                                <img
+                                    src={product.image}
+                                    alt={`Product image of ${product.title}`}
+                                    className="w-full aspect-[3/2] h-full object-cover"
+                                />
+                            </div>
+                        </CarouselItem>
+                        <CarouselItem>
+                            <div className="w-full rounded-2xl overflow-hidden border">
+                                <video
+                                    src={Recording}
+                                    className="w-full aspect-[3/2] h-full object-cover"
+                                    autoPlay
+                                    muted
+                                    playsInline
+                                    loop
+                                />
+                            </div>
+                        </CarouselItem>
+                    </CarouselContent>
+                    <CarouselNext className="-translate-x-8" />
+                    <CarouselPrevious className="translate-x-8" />
+                </Carousel>
 
                 <div className="flex flex-col gap-4 w-full justify-center max-w-[400px]">
                     <div className="flex flex-col gap-2">
@@ -77,7 +108,7 @@ const ProductDetailPage = () => {
                             {product.rating}
                         </span>
                     </div>
-                    <p className="text-2xl font-semibold text-primary">${product.price} <span className="text-muted-foreground font-medium line-through">${(product.price * 1.2).toFixed(2)}</span></p>
+                    <p className="text-2xl font-semibold text-primary flex gap-2">{formatPrice(product.price)}<span className="text-muted-foreground font-medium line-through">{formatPrice(product.price * 1.2)}</span></p>
                     <div className="flex gap-4">
                         <AlertDialog>
                             <AlertDialogTrigger asChild>
@@ -102,14 +133,14 @@ const ProductDetailPage = () => {
                                         </h4>
                                         <Badge>{product.category}</Badge>
                                         <p className="text-xl font-medium flex items-center gap-2">
-                                            ${product.price}
-                                            <span className="text-muted-foreground line-through">${(product.price * 1.2).toFixed(2)}</span>
+                                            {formatPrice(product.price)}
+                                            <span className="text-muted-foreground line-through">${formatPrice(product.price * 1.2)}</span>
                                         </p>
                                     </div>
                                 </div>
                                 <AlertDialogFooter>
                                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                    <AlertDialogAction asChild><Link to={`/products/order/${product.title}`}>Buy Now</Link></AlertDialogAction>
+                                    <AlertDialogAction onClick={handlePayment} >Buy Now</AlertDialogAction>
                                 </AlertDialogFooter>
                             </AlertDialogContent>
                         </AlertDialog>
@@ -121,6 +152,7 @@ const ProductDetailPage = () => {
                             aria-label="Add to cart"
                             onClick={() =>
                                 addToCart({
+                                    id: product.id,
                                     title: product.title,
                                     image: product.image,
                                     price: product.price,
@@ -184,7 +216,7 @@ const ProductDetailPage = () => {
                     </div>
                     <div className="grid grid-cols-1 gap-4 mt-4">
                         {Rekomendation.map((item) => (
-                            <CardProduk key={item.title}
+                            <CardProduk key={item.id}
                                 title={item.title}
                                 image={item.image}
                                 price={item.price}

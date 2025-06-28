@@ -16,6 +16,7 @@ import {
   User,
   Package
 } from 'lucide-react';
+import { formatPrice } from '@/lib/format';
 
 const orders = [
   {
@@ -287,7 +288,7 @@ export default function Orders() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Revenue</p>
-                <p className="text-2xl font-bold text-foreground">${totalRevenue}</p>
+                <p className="text-2xl font-bold text-foreground">{formatPrice(totalRevenue)}</p>
               </div>
               <div className="h-8 w-8 bg-green-100 rounded-full flex items-center justify-center">
                 <span className="text-green-600 font-bold text-sm">$</span>
@@ -362,7 +363,7 @@ export default function Orders() {
                         <p className="font-medium text-foreground">{order.product}</p>
                       </td>
                       <td className="p-4">
-                        <span className="font-bold text-foreground">${order.amount}</span>
+                        <span className="font-bold text-foreground">{formatPrice(order.amount)}</span>
                       </td>
                       <td className="p-4">
                         <Badge className={`${getStatusColor(order.status)} capitalize`}>

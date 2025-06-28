@@ -8,8 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Upload, X } from 'lucide-react';
 import { toast } from 'sonner';
-import { type Product } from '@/hooks/useProduct';
-import productsJson from '@/data/product.json';
+import { useProduct, type Product } from '@/hooks/useProduct';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 
 export default function EditProduct() {
@@ -26,24 +25,24 @@ export default function EditProduct() {
         tools: [],
         rating: 0,
         sales: 0,
-        status: '',
+        status: 'Active',
         reviews: [],
         createdAt: '',
         updatedAt: '',
         revenue: 0
     });
 
-    const [uploadedImage, setUploadedImage] = useState<string | null>(
-        'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=400'
-    );
+    const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+
+    const { products } = useProduct();
 
     useEffect(() => {
-        const product = productsJson.find((product) => product.id.toString() === id);
+        const product = products?.find((product) => product.id.toString() === id);
         if (product) {
-            setFormData(product);
+            setFormData(product as Product);
             setUploadedImage(product.image);
         }
-    }, [id]);
+    }, [id, products]);
 
     const addFeature = () => {
         setFormData(prev => ({
@@ -158,16 +157,14 @@ export default function EditProduct() {
                                             <SelectValue />
                                         </SelectTrigger>
                                         <SelectContent>
-                                            <SelectItem value="website-templates">Website Templates</SelectItem>
-                                            <SelectItem value="ai-agents">AI Agents</SelectItem>
-                                            <SelectItem value="ui-kits">UI Kits</SelectItem>
-                                            <SelectItem value="plugins">Plugins</SelectItem>
+                                            <SelectItem value="Website Templates">Website Templates</SelectItem>
+                                            <SelectItem value="AI Agents">AI Agents</SelectItem>
                                         </SelectContent>
                                     </Select>
                                 </div>
 
                                 <div>
-                                    <Label htmlFor="price">Price ($)</Label>
+                                    <Label htmlFor="price">Price</Label>
                                     <Input
                                         id="price"
                                         type="number"

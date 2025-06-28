@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react"
 
 export interface CartItem {
+    id: string
     title: string
     image: string
     price: number

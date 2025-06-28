@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Next.js",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/nextdotjs.svg"
+  },
+  {
+    "name": "Tailwind CSS",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/tailwindcss.svg"
+  },
+  {
+    "name": "HTML5",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/html5.svg"
+  },
+  {
+    "name": "Bootstrap",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/bootstrap.svg"
+  },
+  {
+    "name": "React",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/react.svg"
+  },
+  {
+    "name": "SCSS",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/sass.svg"
+  },
+  {
+    "name": "Vue.js",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/vuedotjs.svg"
+  },
+  {
+    "name": "Vuetify",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/vuetify.svg"
+  },
+  {
+    "name": "Gatsby",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/gatsby.svg"
+  },
+  {
+    "name": "Jekyll",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/jekyll.svg"
+  },
+  {
+    "name": "Markdown",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/markdown.svg"
+  },
+  {
+    "name": "TypeScript",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/typescript.svg"
+  },
+  {
+    "name": "Flutter",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/flutter.svg"
+  },
+  {
+    "name": "TensorFlow.js",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/tensorflow.svg"
+  },
+  {
+    "name": "TensorFlow",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/tensorflow.svg"
+  },
+  {
+    "name": "PyTorch",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/pytorch.svg"
+  },
+  {
+    "name": "Python",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/python.svg"
+  },
+  {
+    "name": "Go",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/go.svg"
+  },
+  {
+    "name": "Firebase",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/firebase.svg"
+  },
+  {
+    "name": "GraphQL",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/graphql.svg"
+  },
+  {
+    "name": "gRPC",
+    "icon": "https://unpkg.com/simple-icons@latest/icons/grpc.svg"
+  }
+]

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -6,22 +6,34 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Upload, X } from 'lucide-react';
+import { Check, Plus, Upload, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
+import { useProduct, type ProductUploadProps } from '@/hooks/useProduct';
+import { supabase } from '@/lib/supabaseClient';
+import tools from '@/data/tools.json';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Command, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 
 export default function AddProduct() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ProductUploadProps>({
     title: '',
     category: '',
-    price: '',
+    price: 0,
     description: '',
     features: [''],
     tools: [{ name: '', icon: '' }],
+    rating: 0,
+    image: '',
   });
-
   const [dragActive, setDragActive] = useState(false);
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [uploadedImage, setUploadedImage] = useState<File | null>(null);
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const { createProduct, errorAdd } = useProduct();
+
+  const imageInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
@@ -40,19 +52,16 @@ export default function AddProduct() {
 
     const files = e.dataTransfer.files;
     if (files && files[0]) {
-      handleFile(files[0]);
+      handleImage({ target: { files } } as React.ChangeEvent<HTMLInputElement>);
     }
   };
 
-  const handleFile = (file: File) => {
-    if (file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setUploadedImage(e.target?.result as string);
-      };
-      reader.readAsDataURL(file);
+  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0]
+    if (selectedFile) {
+      setUploadedImage(selectedFile);
     }
-  };
+  }
 
   const addFeature = () => {
     setFormData(prev => ({
@@ -75,10 +84,12 @@ export default function AddProduct() {
     }));
   };
 
-  const addTool = () => {
-    setFormData(prev => ({
+  const addTool = (toolName: string) => {
+    const tool = tools.find((t) => t.name === toolName);
+    if (!tool) return;
+    setFormData((prev) => ({
       ...prev,
-      tools: [...prev.tools, { name: '', icon: '' }]
+      tools: [...prev.tools, { name: tool.name, icon: tool.icon }],
     }));
   };
 
@@ -89,18 +100,66 @@ export default function AddProduct() {
     }));
   };
 
-  const updateTool = (index: number, field: 'name' | 'icon', value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      tools: prev.tools.map((tool, i) =>
-        i === index ? { ...tool, [field]: value } : tool
-      )
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success('Product added successfully!');
+    setUploading(true);
+    if (formData.title === '') {
+      toast.error('Title is required');
+    } else if (formData.category === '') {
+      toast.error('Category is required');
+    } else if (formData.price === 0) {
+      toast.error('Price is required');
+    } else if (formData.description === '') {
+      toast.error('Description is required');
+    } else if (formData.features.length === 0) {
+      toast.error('Features are required');
+    } else if (formData.tools.length === 0) {
+      toast.error('Tools are required');
+    } else {
+      const fileExt = uploadedImage?.name.split('.').pop()
+      const fileName = `${Date.now()}.${fileExt}`
+      const filePath = `uploads/${fileName}`
+
+      const { error } = await supabase.storage.from('course').upload(filePath, uploadedImage!)
+
+      if (error) {
+        console.log(error)
+        toast.error(error.message)
+        return
+      } else {
+        const { data } = await supabase.storage
+          .from('course')
+          .getPublicUrl(filePath);
+        const dataIn = {
+          title: formData.title,
+          image: data.publicUrl,
+          price: formData.price,
+          category: formData.category,
+          description: formData.description,
+          features: formData.features,
+          tools: formData.tools,
+          rating: formData.rating,
+        }
+        const sendData = await createProduct(dataIn);
+        if (sendData) {
+          toast.success('Product created successfully');
+          setFormData({
+            title: '',
+            category: '',
+            price: 0,
+            description: '',
+            features: [''],
+            tools: [{ name: '', icon: '' }],
+            rating: 0,
+            image: '',
+          });
+          setUploadedImage(null);
+        } else {
+          toast.error(errorAdd);
+        }
+      }
+      setUploading(false);
+    }
   };
 
   return (
@@ -134,11 +193,11 @@ export default function AddProduct() {
         {/* Main Form */}
         <div className="lg:col-span-2 space-y-6">
           <Card>
-            <CardHeader>
-              <CardTitle>Basic Information</CardTitle>
-              <CardDescription>Essential details about your product</CardDescription>
-            </CardHeader>
             <CardContent className="space-y-4">
+              <div className="flex flex-col gap-0">
+                <h1 className='text-xl font-bold'>Basic Information</h1>
+                <p className='text-muted-foreground'>Essential details about your product</p>
+              </div>
               <div>
                 <Label htmlFor="title">Product Title</Label>
                 <Input
@@ -158,21 +217,19 @@ export default function AddProduct() {
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="website-templates">Website Templates</SelectItem>
-                      <SelectItem value="ai-agents">AI Agents</SelectItem>
-                      <SelectItem value="ui-kits">UI Kits</SelectItem>
-                      <SelectItem value="plugins">Plugins</SelectItem>
+                      <SelectItem value="Website Templates">Website Templates</SelectItem>
+                      <SelectItem value="AI Agents">AI Agents</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div>
-                  <Label htmlFor="price">Price ($)</Label>
+                  <Label htmlFor="price">Price</Label>
                   <Input
                     id="price"
                     type="number"
                     value={formData.price}
-                    onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
+                    onChange={(e) => setFormData(prev => ({ ...prev, price: Number(e.target.value) }))}
                     placeholder="29"
                     className="mt-1"
                   />
@@ -190,15 +247,11 @@ export default function AddProduct() {
                   className="mt-1"
                 />
               </div>
-            </CardContent>
-          </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Product Features</CardTitle>
-              <CardDescription>List the key features of your product</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
+              <div className="flex flex-col gap-0">
+                <h1 className='text-xl font-bold'>Product Features</h1>
+                <p className='text-muted-foreground'>List the key features of your product</p>
+              </div>
               {formData.features.map((feature, index) => (
                 <div key={index} className="flex items-center space-x-2">
                   <Input
@@ -222,44 +275,75 @@ export default function AddProduct() {
               <Button type="button" variant="outline" onClick={addFeature}>
                 Add Feature
               </Button>
-            </CardContent>
-          </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Tools & Technologies</CardTitle>
-              <CardDescription>Technologies used in this product</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
+              <div className="flex flex-col gap-0 mt-4">
+                <h1 className='text-xl font-bold'>Tools & Technologies</h1>
+                <p className='text-muted-foreground'>Technologies used in this product</p>
+              </div>
               {formData.tools.map((tool, index) => (
-                <div key={index} className="flex items-center space-x-2">
-                  <Input
-                    value={tool.name}
-                    onChange={(e) => updateTool(index, 'name', e.target.value)}
-                    placeholder="Tool name (e.g., React)"
-                    className="flex-1"
-                  />
-                  <Input
-                    value={tool.icon}
-                    onChange={(e) => updateTool(index, 'icon', e.target.value)}
-                    placeholder="Icon URL (optional)"
-                    className="flex-1"
-                  />
-                  {formData.tools.length > 1 && (
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => removeTool(index)}
-                    >
-                      <X className="w-4 h-4" />
-                    </Button>
+                <div key={index} className="flex w-full items-center justify-between">
+                  {tool.name.length > 0 || tool.icon.length > 0 ? (
+                    <>
+                      <div className="flex items-center gap-2 p-2 rounded-md border">
+                        <img src={tool.icon} alt={tool.name} className="w-4 h-4" />
+                        <span>{tool.name}</span>
+                      </div>
+                      <Button
+                        type="button"
+                        variant="destructive"
+                        size="icon"
+                        onClick={() => removeTool(index)}
+                      >
+                        <X className="w-4 h-4" />
+                      </Button>
+                    </>
+                  ) : (
+                    <p>No tools added</p>
                   )}
                 </div>
               ))}
-              <Button type="button" variant="outline" onClick={addTool}>
-                Add Tool
-              </Button>
+
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="w-full justify-start"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Tool
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-full p-0">
+                  <Command>
+                    <CommandInput placeholder="Search tools..." />
+                    <CommandList>
+                      {tools.map((tool) => (
+                        <CommandItem
+                          key={tool.name}
+                          value={tool.name}
+                          onSelect={() => addTool(tool.name)}
+                        >
+                          <Check
+                            className={formData.tools.some(
+                              (t) => t.name === tool.name && t.icon === tool.icon
+                            )
+                              ? "opacity-100"
+                              : "opacity-0"}
+                            aria-hidden="true"
+                          />
+                          <img
+                            src={tool.icon}
+                            alt={tool.name}
+                            className="w-4 h-4 mr-2"
+                          />
+                          {tool.name}
+                        </CommandItem>
+                      ))}
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
             </CardContent>
           </Card>
         </div>
@@ -283,14 +367,17 @@ export default function AddProduct() {
                 {uploadedImage ? (
                   <div className="space-y-4">
                     <img
-                      src={uploadedImage}
+                      src={URL.createObjectURL(uploadedImage)}
                       alt="Preview"
                       className="w-full h-48 object-cover rounded-lg"
                     />
                     <Button
                       type="button"
                       variant="outline"
-                      onClick={() => setUploadedImage(null)}
+                      onClick={() => {
+                        setUploadedImage(null);
+                        imageInputRef.current!.value = '';
+                      }}
                     >
                       Remove Image
                     </Button>
@@ -298,29 +385,38 @@ export default function AddProduct() {
                 ) : (
                   <div className="space-y-4">
                     <Upload className="w-12 h-12 text-gray-400 mx-auto" />
-                    <div>
-                      <p className="text-sm text-gray-600">
-                        Drag and drop an image here, or click to browse
-                      </p>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        className="hidden"
-                        id="image-upload"
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          if (file) handleFile(file);
-                        }}
-                      />
-                      <label htmlFor="image-upload">
-                        <Button type="button" variant="outline" className="mt-2">
-                          Browse Files
-                        </Button>
-                      </label>
-                    </div>
+                    <p className="text-sm text-gray-600">
+                      Drag and drop an image here, or click to browse
+                    </p>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="mt-2"
+                      onClick={() => imageInputRef.current?.click()}
+                    >
+                      Browse Files
+                    </Button>
+                    <input
+                      ref={imageInputRef}
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={handleImage}
+                    />
                   </div>
                 )}
               </div>
+            </CardContent>
+          </Card>
+
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Product File</CardTitle>
+              <CardDescription>Upload a file for your product</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <input type="file" className='w-full border p-2 rounded-lg' onChange={(e) => setUploadedFile(e.target.files?.[0] as File)} />
             </CardContent>
           </Card>
 
@@ -329,8 +425,8 @@ export default function AddProduct() {
               <CardTitle>Publishing</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
-                Create Product
+              <Button type="submit" disabled={uploading} className="w-full bg-blue-600 hover:bg-blue-700">
+                {uploading ? 'Uploading...' : 'Create Product'}
               </Button>
               <Button type="button" variant="outline" className="w-full">
                 Save as Draft

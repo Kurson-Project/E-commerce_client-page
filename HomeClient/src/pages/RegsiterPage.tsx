@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Link, Navigate, useNavigate } from "react-router-dom"
 import { AuthForm, InputFormAuth } from "@/components/layouts/AuthForm"
-import { validateEmail, validatePassword, validateUsername } from "@/components/templates/ValidateForm"
+import { validateEmail, validatePassword, validateUsername } from "@/lib/ValidateForm"
 import { useAuth } from "@/hooks/useAuth"
 
 const RegisterPage = () => {
@@ -72,7 +72,7 @@ const RegisterPage = () => {
                 error={error.password}
             />
             <div className="w-full flex items-center text-sm text-muted-foreground gap-2">
-                <input type="checkbox" className="ml-2" required/>
+                <input type="checkbox" className="ml-2" required />
                 Have you agreed to the <Link to="/terms" className="text-blue-600 ml-1 hover:underline dark:text-blue-500">Terms and Conditions</Link>?
             </div>
             <div className="w-full flex flex-col gap-2">

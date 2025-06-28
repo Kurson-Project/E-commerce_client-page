@@ -3,12 +3,15 @@ import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react"
 import { Link, Navigate, useNavigate } from "react-router-dom"
 import { useAuth } from "@/hooks/useAuth"
+import { formatPrice } from "@/lib/format"
+import useProduct from "@/hooks/useProduct"
 
 export default function ProductCartPage() {
     const { cart, removeFromCart, clearCart } = useCart()
     const navigate = useNavigate()
 
     const { isAuthenticated } = useAuth()
+    const { payment } = useProduct()
 
     const totalPrice = cart.reduce(
         (total, item) => total + item.price * item.quantity,
@@ -46,16 +49,16 @@ export default function ProductCartPage() {
                             />
                             <div>
                                 <h3 className="font-semibold">{item.title}</h3>
-                                <p className="text-sm text-muted-foreground">${item.price}</p>
+                                <p className="text-sm text-muted-foreground">{formatPrice(item.price)}</p>
                             </div>
                         </div>
 
                         <div className="flex items-center gap-4">
                             <Button
-                                asChild
+                                onClick={async () => await payment({ id: item.id})}
                                 size="sm"
                             >
-                                <Link to={`/products/order/${item.title}`}>Buy</Link>
+                                Buy
                             </Button>
 
                             <Button
@@ -72,7 +75,7 @@ export default function ProductCartPage() {
                                 onClick={() => removeFromCart(item.title)}
                                 title="Remove from cart"
                             >
-                                <Trash2/>
+                                <Trash2 />
                             </Button>
                         </div>
                     </div>
@@ -82,7 +85,7 @@ export default function ProductCartPage() {
             {/* Ringkasan dan Checkout */}
             <div className="flex flex-col items-end gap-4">
                 <p className="text-lg font-semibold">
-                    Total: <span className="text-primary">${totalPrice.toFixed(2)}</span>
+                    Total: <span className="text-primary">{formatPrice(totalPrice)}</span>
                 </p>
                 <div className="flex gap-2">
                     <Button variant="outline" onClick={clearCart}>

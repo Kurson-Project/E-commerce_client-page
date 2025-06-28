@@ -1,7 +1,6 @@
 import { FadeIn } from "@/components/templates/animated/FadeMotion";
 import CardProduk from "@/components/templates/card/CardProduk";
 import { Button } from "@/components/ui/button";
-import DataProduk from "@/data/product.json";
 import { Check, ChevronsUpDown, Funnel, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -34,10 +33,13 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import type { ProductProps } from "@/hooks/useProduct";
+import useProduct from "@/hooks/useProduct";
+import Loading from "@/components/layouts/Loading";
 
 const ProductPage = () => {
   const [inputSearch, setInputSearch] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState(DataProduk);
+  const [filteredProducts, setFilteredProducts] = useState<ProductProps[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("All Products");
   const [filterOpen, setFilterOpen] = useState(false);
   const [filterTools, setFilterTools] = useState<string[]>([]);
@@ -47,17 +49,19 @@ const ProductPage = () => {
   const location = useLocation().pathname;
   const categories = ProductCategoryJson;
 
+  const { products, loading } = useProduct()
+
   useEffect(() => {
     const pathToCategoryMap: Record<string, string> = {
-      "/products/website-templates": "Website Templates",
-      "/products/ai-agents": "AI Agents",
+      "/products/website-builder": "Website Builder",
+      "/products/ai-automation": "AI Automation",
       "/products/customize": "Customize",
     };
     setSelectedCategory(pathToCategoryMap[location] || "All Products");
   }, [location]);
 
   useEffect(() => {
-    const filtered = DataProduk.filter((produk) => {
+    const filtered = products.filter((produk) => {
       const matchTitle = produk.title.toLowerCase().includes(inputSearch.toLowerCase());
       const matchCategory = selectedCategory === "All Products" || produk.category === selectedCategory;
       const matchTools = filterTools.length === 0 || produk.tools.some((tool) => filterTools.includes(tool.name));
@@ -84,15 +88,19 @@ const ProductPage = () => {
         break;
     }
     setFilteredProducts(filtered);
-  }, [inputSearch, selectedCategory, filterTools, sortBy]);
+  }, [inputSearch, selectedCategory, filterTools, sortBy, products]);
 
   useEffect(() => {
     const toolsSet = new Set<string>();
-    DataProduk.forEach((produk) => {
+    products.forEach((produk) => {
       produk.tools.forEach((tool) => toolsSet.add(tool.name));
     });
     setAllTools(Array.from(toolsSet));
-  }, []);
+  }, [products]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <>

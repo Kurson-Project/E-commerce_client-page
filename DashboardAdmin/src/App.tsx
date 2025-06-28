@@ -12,8 +12,12 @@ import EditProduct from "./pages/EditProductPage"
 import UsersPage from "./pages/UsersPage"
 import ProductDetail from "./pages/ProductDetails"
 import AppHeaders from "./components/layouts/AppHeaders"
+import LoginPage from "./pages/LoginPage"
+import { useAuth } from "./hooks/useAuth"
 
 const MainLayout = () => {
+  const { isAuthenticated } = useAuth()
+  if (!isAuthenticated) return <LoginPage />
   return (
     <SidebarProvider className="bg-gradient-to-br from-blue-600/5 to-purple-600/5 dark:from-blue-600/10 dark:to-purple-600/10">
       <AppSidebar />
@@ -34,8 +38,8 @@ const App = () => {
         <Route path="/orders" element={<OrdersPage />} />
         <Route path="/orders/:id" element={<OrdersPage />} />
         <Route path="/products" element={<ProductsPage />} />
-        <Route path="/products/details/:id" element={<ProductDetail />} />
-        <Route path="/products/edit/:id" element={<EditProduct />} />
+        <Route path="/product/details/:id" element={<ProductDetail />} />
+        <Route path="/product/edit/:id" element={<EditProduct />} />
         <Route path="/products/add" element={<AddProductPage />} />
         <Route path="/notifications" element={<NotificationsPage />} />
         <Route path="/notifications/:id" element={<NotificationsPage />} />

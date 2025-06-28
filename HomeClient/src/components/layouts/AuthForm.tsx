@@ -1,5 +1,5 @@
 import { ModeToggle } from "@/components/fragments/mode-toggel"
-import bgForm from "@/assets/background/bacgroun-form-image.png"
+import bgForm from "@/assets/lumino-lambang.jpg"
 import { ArrowLeft, Eye, EyeOff } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
@@ -31,7 +31,7 @@ export const AuthForm = ({ handleSubmit, children, title }: AuthFormProps) => {
 
             <div className="w-full h-full flex items-center justify-center rounded-xl border bg-background overflow-hidden">
                 <div className="w-1/2 h-full bg-gradient-to-br from-indigo-600/30 to-purple-600/30 md:flex hidden items-center justify-center">
-                    <img src={bgForm} alt="" className="w-full h-full object-contain filter drop-shadow-[0_0_5px_var(--color-foreground)]" />
+                    <img src={bgForm} alt="" className="w-full h-full object-cover filter drop-shadow-[0_0_5px_var(--color-foreground)]" />
                 </div>
                 <div className="md:w-1/2 w-full h-full flex flex-col gap-4 items-center justify-center px-res-xxl">
                     <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">{title}</h1>

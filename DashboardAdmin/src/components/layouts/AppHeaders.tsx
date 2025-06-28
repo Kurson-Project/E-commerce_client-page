@@ -5,8 +5,10 @@ import { Badge } from "@/components/ui/badge"
 import { SidebarTrigger } from "../ui/sidebar"
 import { ModeToggle } from "../fragments/mode-toggel"
 import { Link } from "react-router-dom"
-
+import { useAuth } from "@/hooks/useAuth"
 const AppHeaders = () => {
+    const { logout, user } = useAuth()
+
     return (
         <nav className="w-full z-50 bg-background sticky top-2 flex items-center justify-between rounded-md border shadow px-2 py-1">
             <div className="flex items-center gap-2">
@@ -31,10 +33,21 @@ const AppHeaders = () => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-56">
                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                        <DropdownMenuItem asChild>
+                            <Link to="#" className="flex items-center">
+                                <div className="w-10 h-10 border rounded-full bg-primary text-white flex items-center justify-center text-xl shadow">
+                                    {user?.name?.charAt(0)}
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="font-medium">{user?.name}</span>
+                                    <span className="text-xs text-muted-foreground">{user?.email}</span>
+                                </div>
+                            </Link>
+                        </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem asChild><Link to="/settings" className="flex items-center"><Settings className="mr-2" /> Settings</Link></DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem className="text-red-600">Sign Out</DropdownMenuItem>
+                        <DropdownMenuItem className="text-red-600" onClick={() => logout()}>Sign Out</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
                 <ModeToggle />

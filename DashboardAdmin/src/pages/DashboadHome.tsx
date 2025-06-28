@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 import { Badge } from "@/components/ui/badge"
+import { formatPrice } from "@/lib/format"
 
 const recentOrders = [
     { id: '#ORD-001', customer: 'John Doe', product: 'Modern Portfolio Template', amount: 29, status: 'completed' },
@@ -34,7 +35,7 @@ const AdminDashboard = () => {
                         <DollarSign className="h-4 w-4 text-green-600" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">$12,456</div>
+                        <div className="text-2xl font-bold">{formatPrice(5000)}</div>
                         <p className="text-xs text-green-600 flex items-center mt-1">
                             <TrendingUp className="w-5 h-5 mr-1" />
                             +12.5% from last month
@@ -116,10 +117,10 @@ const AdminDashboard = () => {
                                         </div>
                                         <div className="hidden md:block">
                                             <p className="text-sm">{order.product}</p>
+                                            <span className="font-medium">{formatPrice(order.amount)}</span>
                                         </div>
                                     </div>
                                     <div className="flex items-center space-x-4">
-                                        <span className="font-medium">${order.amount}</span>
                                         <Badge
                                             variant={
                                                 order.status === 'completed' ? 'default' :

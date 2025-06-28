@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Link, Navigate, useNavigate } from "react-router-dom"
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom"
 import { AuthForm, InputFormAuth } from "@/components/layouts/AuthForm"
-import { validateEmail, validatePassword } from "@/components/templates/ValidateForm"
+import { validateEmail, validatePassword } from "@/lib/ValidateForm"
 import { useAuth } from "@/hooks/useAuth"
+import Cookies from "js-cookie"
 
 const LoginPage = () => {
     const [email, setEmail] = useState("")
@@ -16,7 +17,7 @@ const LoginPage = () => {
 
     const navigate = useNavigate()
 
-    const { login, isAuthenticated, error: authError, loading } = useAuth()
+    const { login, isAuthenticated, error: authError, loading, google } = useAuth()
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -70,12 +71,29 @@ const LoginPage = () => {
                     <div className="w-full border-t border-muted-foreground"></div>
                 </div>
 
-                <Button variant="outline" className="w-full">Login with Google</Button>
+                <Button variant="outline" type="button" className="w-full" disabled={loading} onClick={() => google()}>
+                    <img src="https://www.svgrepo.com/show/353817/google-icon.svg" alt="" className="h-full" />
+                    Login with Google
+                </Button>
 
                 <p>Don&apos;t have an account? <Link to="/register" className="text-sm text-blue-600 hover:underline dark:text-blue-500">Register</Link></p>
             </div>
         </AuthForm>
     )
+}
+
+export const LoginGoogleCallback = () => {
+    const token = useLocation().search.split("=")[1].split("&")[0]
+
+    const saveToken = (token: string) => {
+        Cookies.set("token", token, { expires: 7, path: "/", secure: false })
+    }
+
+    useEffect(() => {
+        if (token) saveToken(token)
+    }, [token])
+
+    return <Navigate to={"/"} />
 }
 
 export default LoginPage

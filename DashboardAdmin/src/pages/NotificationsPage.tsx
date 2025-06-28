@@ -23,7 +23,7 @@ import {
 
 const notifications = [
     {
-        id: 1,
+        id: "1",
         type: 'order',
         title: 'New Order Received',
         message: 'John Doe purchased "Modern Portfolio Template" for $29.00',
@@ -32,8 +32,9 @@ const notifications = [
         icon: ShoppingCart,
     },
     {
-        id: 2,
+        id: "2",
         type: 'product',
+        email: 'n2E5w@example.co',
         title: 'Product Review Added',
         message: 'New 5-star review for "E-commerce AI Agent" by Jane Smith',
         time: '15 minutes ago',
@@ -41,8 +42,9 @@ const notifications = [
         icon: Package,
     },
     {
-        id: 3,
+        id: "3",
         type: 'user',
+        email: 'n2E5w@example.com',
         title: 'New User Registration',
         message: 'Alice Brown has created a new account',
         time: '1 hour ago',
@@ -50,7 +52,7 @@ const notifications = [
         icon: User,
     },
     {
-        id: 4,
+        id: "4",
         type: 'system',
         title: 'System Backup Completed',
         message: 'Daily backup completed successfully at 3:00 AM',
@@ -59,7 +61,7 @@ const notifications = [
         icon: CheckCircle,
     },
     {
-        id: 5,
+        id: "5",
         type: 'warning',
         title: 'High Server Load Detected',
         message: 'Server CPU usage exceeded 85% for 5 minutes',
@@ -68,7 +70,7 @@ const notifications = [
         icon: AlertTriangle,
     },
     {
-        id: 6,
+        id: "6",
         type: 'order',
         title: 'Order Refund Requested',
         message: 'Charlie Wilson requested refund for order #ORD-005',
@@ -77,7 +79,7 @@ const notifications = [
         icon: ShoppingCart,
     },
     {
-        id: 7,
+        id: "7",
         type: 'system',
         title: 'System Update Available',
         message: 'Version 2.1.5 is now available for installation',
@@ -86,7 +88,7 @@ const notifications = [
         icon: Settings,
     },
     {
-        id: 8,
+        id: "8",
         type: 'product',
         title: 'Product Stock Low',
         message: 'Landing Page Kit has only 3 licenses remaining',
@@ -102,7 +104,7 @@ export default function Notifications() {
 
     const unreadCount = notificationList.filter(n => !n.read).length;
 
-    const markAsRead = (id: number) => {
+    const markAsRead = (id: string) => {
         setNotificationList(prev => prev.map(notification =>
             notification.id === id ? { ...notification, read: true } : notification
         ));
@@ -112,7 +114,7 @@ export default function Notifications() {
         setNotificationList(prev => prev.map(notification => ({ ...notification, read: true })));
     };
 
-    const deleteNotification = (id: number) => {
+    const deleteNotification = (id: string) => {
         setNotificationList(prev => prev.filter(notification => notification.id !== id));
     };
 

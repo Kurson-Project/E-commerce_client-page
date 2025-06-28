@@ -1,6 +1,7 @@
 import { AuthContext, type User } from "@/hooks/useAuth"
 import { useEffect, useState } from "react"
 import Cookies from "js-cookie"
+import { Navigate } from "react-router-dom"
 
 const API_URI = import.meta.env.VITE_API_URI
 
@@ -32,41 +33,22 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     register: "",
     logout: "",
   });
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(Boolean);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const token = Cookies.get("token")
     if (!token) {
+      setIsAuthenticated(false)
       return;
     }
     const payload = parseJwt(token);
+    console.log(payload)
     setUser({
       name: payload.username,
       email: payload.user_email
-    });
-
-    const getUser = async () => {
-      try {
-        const response = await fetch(`${API_URI}/user`, {
-          method: "GET",
-          headers: {
-            "Accept": "*/*",
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-          },
-        })
-        const data = await response.json()
-        setUser({
-          name: data.data.username,
-          email: data.data.user_email
-        })
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    getUser()
+    })
+    setIsAuthenticated(true)
   }, [])
 
   const login = async (email: string, password: string): Promise<boolean> => {
@@ -94,6 +76,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       saveToken(data.data.token)
       setUser(data.data)
       setLoading(false)
+      setIsAuthenticated(true)
       return true
     } catch (error) {
       console.error(error)
@@ -120,8 +103,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const errorData = await response.json()
         setError({ ...error, register: errorData.message })
         throw new Error(errorData.message)
-      }
-      if (response.ok) {
+      } else if (response.ok) {
         const resLogin = await fetch(`${API_URI}/auth/login`, {
           method: "POST",
           headers: {
@@ -139,15 +121,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           throw new Error(errorLogin.message)
         }
         const dataLogin = await resLogin.json()
+
         saveToken(dataLogin.data.token)
         setUser(dataLogin.data)
+        setIsAuthenticated(true)
         return true
       }
 
-      const data = await response.json()
-      console.log(data)
-      saveToken(data.data.token)
-      setUser(data.data)
       setLoading(false)
       return true
     } catch (error) {
@@ -156,23 +136,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
+  const google = () => {
+    setIsAuthenticated(true)
+    return window.location.href = `${API_URI}/auth/google?redirect=${window.location.href}/google`
+  }
+
   const logout = () => {
     setUser(null)
     Cookies.remove("token")
+    setIsAuthenticated(false)
+    return <Navigate to={"/login"} />
   }
-
-  useEffect(() => {
-    if (user && user.name === undefined) {
-      setIsAuthenticated(false)
-    } else if (!user) {
-      setIsAuthenticated(false)
-    } else if (!Cookies.get("token")) {
-      setIsAuthenticated(false)
-    } else {
-      setIsAuthenticated(true)
-    }
-  }, [user])
-
+  console.log(isAuthenticated)
   return (
     <AuthContext.Provider
       value={{
@@ -181,6 +156,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         loading,
         login,
         register,
+        google,
         logout,
         isAuthenticated,
       }}

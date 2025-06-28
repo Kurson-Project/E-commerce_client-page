@@ -22,6 +22,7 @@ import {
     Calendar,
     User
 } from 'lucide-react';
+import { formatPrice } from '@/lib/format';
 
 const users = [
     {
@@ -191,7 +192,7 @@ export default function UsersPage() {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-sm font-medium text-muted-foreground">Total Revenue</p>
-                                <p className="text-2xl font-bold">${totalRevenue}</p>
+                                <p className="text-2xl font-bold">{formatPrice(totalRevenue)}</p>
                             </div>
                             <div className="h-8 w-8 bg-green-100 rounded-full flex items-center justify-center">
                                 <span className="text-green-600 font-bold text-sm">$</span>

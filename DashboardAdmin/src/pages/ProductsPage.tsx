@@ -23,10 +23,11 @@ import {
   Pencil,
   Filter
 } from 'lucide-react';
-import products from '@/data/product.json';
+import { useProduct } from '@/hooks/useProduct';
+import { formatPrice } from '@/lib/format';
 
 export default function Products() {
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
   const [filters, setFilters] = useState({
     search: '',
     category: 'All Categories',
@@ -38,6 +39,8 @@ export default function Products() {
     sortOrder: 'asc' as 'asc' | 'desc'
   });
   const [filtersOpen, setFiltersOpen] = useState(false);
+
+  const { products } = useProduct();
 
   const clearFilters = () => {
     setFilters({
@@ -53,8 +56,7 @@ export default function Products() {
   };
 
   // Filter and sort products
-  const filteredProducts = products
-    .filter(product => {
+  const filteredProducts = products?.filter(product => {
       // Search filter
       if (filters.search && !product.title.toLowerCase().includes(filters.search.toLowerCase()) &&
         !product.category.toLowerCase().includes(filters.search.toLowerCase()) &&
@@ -107,7 +109,7 @@ export default function Products() {
         <div>
           <h1 className="text-3xl font-bold text-foreground">Products</h1>
           <p className="text-muted-foreground mt-1">
-            Manage your website templates and AI agents • {filteredProducts.length} of {products.length} products
+            Manage your website templates and AI agents • {filteredProducts && filteredProducts.length} of {products && products.length} products
           </p>
         </div>
         <Link to="/products/add">
@@ -125,7 +127,7 @@ export default function Products() {
         <CardContent>
           <div className="flex items-center justify-between">
             <div className="text-sm text-muted-foreground">
-              Showing {filteredProducts.length} products
+              Showing {filteredProducts && filteredProducts.length} products
             </div>
             <div className="flex items-center space-x-2">
               <Button
@@ -162,7 +164,7 @@ export default function Products() {
       )}
 
       {/* Products Grid/List */}
-      {filteredProducts.length === 0 ? (
+      {filteredProducts && filteredProducts.length === 0 ? (
         <Card>
           <CardContent className="p-12 text-center">
             <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -177,8 +179,8 @@ export default function Products() {
         </Card>
       ) : viewMode === 'grid' ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product) => (
-            <Card key={product.title} className="p-0 gap-0 bg-background">
+          {filteredProducts?.map((product) => (
+            <Card key={product.id} className="p-0 gap-0 bg-background">
               <CardHeader className="p-0">
                 <img
                   src={product.image}
@@ -191,15 +193,15 @@ export default function Products() {
                 <CardDescription className="line-clamp-2">
                   <div className="flex gap-2 mt-1 flex-wrap">
                     {product.category}
-                    {product.tools.map((tool) => (
-                      <Badge variant="outline" key={tool.name}>{tool.name}</Badge>
+                    {product.tools.map((tool, index) => (
+                      <Badge variant="outline" key={index}>{tool.name}</Badge>
                     ))}
                   </div>
                 </CardDescription>
               </CardContent>
               <CardFooter className="flex justify-between items-center border-t p-2">
                 <div className="flex items-center gap-2">
-                  <p className="text-lg font-semibold text-primary">${product.price}</p>
+                  <p className="text-lg font-semibold text-primary">{formatPrice(product.price)}</p>
                   <Badge variant="secondary">{product.status}</Badge>
                 </div>
                 <div className="flex items-center gap-2">
@@ -232,7 +234,8 @@ export default function Products() {
               <table className="w-full">
                 <thead className="bg-muted border-b">
                   <tr>
-                    <th className="text-left p-4 font-medium text-foreground">Product</th>
+                    <th className="text-left p-4 font-medium text-foreground">img</th>
+                    <th className="text-left p-4 font-medium text-foreground">Title</th>
                     <th className="text-left p-4 font-medium text-foreground">Category</th>
                     <th className="text-left p-4 font-medium text-foreground">Price</th>
                     <th className="text-left p-4 font-medium text-foreground">Rating</th>
@@ -243,7 +246,7 @@ export default function Products() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredProducts.map((product) => (
+                  {filteredProducts?.map((product) => (
                     <tr key={product.id} className="border-b hover:bg-muted">
                       <td className="p-4">
                         <div className="flex items-center space-x-3">
@@ -252,19 +255,13 @@ export default function Products() {
                             alt={product.title}
                             className="w-12 h-12 object-cover rounded-lg"
                           />
-                          <div>
-                            <Link to={`/products/${product.id}`}>
-                              <p className="font-medium text-foreground hover:text-blue-600 cursor-pointer">
-                                {product.title}
-                              </p>
-                            </Link>
-                          </div>
                         </div>
                       </td>
+                      <td className="p-4">{product.title}</td>
                       <td className="p-4">
                         <Badge variant="secondary">{product.category}</Badge>
                       </td>
-                      <td className="p-4 font-medium">${product.price}</td>
+                      <td className="p-4 font-medium">{formatPrice(product.price)}</td>
                       <td className="p-4">
                         <div className="flex items-center space-x-1">
                           <Star className="w-4 h-4 text-yellow-400 fill-current" />

@@ -54,15 +54,15 @@ const AppNavbar = () => {
 
   return (
     <header
-      className={`fixed top-2 left-2 right-2 z-50 rounded-lg flex items-center justify-between px-res-xl py-1.5 transition-all duration-300
+      className={`fixed border top-2 left-2 right-2 z-50 rounded-lg flex items-center justify-between px-res-xl py-1 transition-all duration-300
        backdrop-blur-lg bg-background/20 shadow-sm
         ${showNavbar ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}
       `}
     >
       <nav className="flex items-center gap-4">
-        <h1 className="text-2xl text-shadow-2xs font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-          <Link to="/">Lumino</Link>
-        </h1>
+        <div className="flex items-center gap-1">
+          <Link to="/" className="text-2xl text-shadow-2xs font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Lumino</Link>
+        </div>
         <NavigationMenu viewport={false} className="hidden md:flex">
           <NavigationMenuList>
             {pathRoutes.map((route) => (

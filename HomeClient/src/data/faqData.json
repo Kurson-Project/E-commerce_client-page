@@ -1,27 +1,22 @@
 [
   {
-    "question": "How does Lumino pricing work?",
-    "answer":
-      "At Lumino, we operate on a one-time purchase model — meaning you only pay once for each product and receive lifetime access without any recurring fees. Each digital product (such as templates, AI tools, or system components) is priced individually based on its features, usage license, and included support. All prices are clearly displayed on the product pages, and we frequently offer promotions or bundles for additional savings."
+    "question": "Bagaimana sistem harga di Lumino?",
+    "answer": "Di Lumino, kami menggunakan model pembelian sekali bayar — artinya Anda hanya membayar satu kali untuk setiap produk dan mendapatkan akses seumur hidup tanpa biaya berulang. Setiap produk digital (seperti template, alat AI, atau komponen sistem) memiliki harga yang berbeda-beda tergantung fitur, lisensi penggunaan, dan dukungan yang disertakan. Semua harga ditampilkan secara transparan di halaman produk, dan kami sering menawarkan promo atau bundel untuk penghematan tambahan."
   },
   {
-    "question": "Can I cancel or request a refund after purchasing?",
-    "answer":
-      "Because our products are delivered digitally and accessible immediately after purchase, all sales are considered final. This policy helps us prevent misuse or unauthorized distribution. However, we understand that issues can arise. If you encounter technical problems or believe there's been a mistake with your order, please contact our support team within 7 days of purchase. We're committed to ensuring customer satisfaction and may offer a replacement or partial refund in specific, verified cases."
+    "question": "Apakah saya bisa membatalkan atau meminta refund setelah membeli?",
+    "answer": "Karena produk kami dikirim secara digital dan bisa langsung diakses setelah pembelian, semua penjualan bersifat final. Kebijakan ini diterapkan untuk mencegah penyalahgunaan atau distribusi tanpa izin. Namun, kami memahami bahwa terkadang bisa terjadi masalah. Jika Anda mengalami kendala teknis atau merasa ada kesalahan dalam pesanan, silakan hubungi tim dukungan kami dalam waktu 7 hari sejak pembelian. Kami berkomitmen untuk kepuasan pelanggan dan mungkin akan menawarkan penggantian atau refund sebagian dalam kasus tertentu yang terverifikasi."
   },
   {
-    "question": "Do you offer discounts for students, educators, or teams?",
-    "answer":
-      "Yes, Lumino provides special pricing for students, educators, non-profits, and professional teams. To request a discount, you’ll need to provide valid proof (such as a student ID, academic email, or business domain). Team licenses are also available for bulk purchases with centralized billing and management. Reach out to our sales team to discuss your needs, and we'll help create a custom offer tailored to your situation."
+    "question": "Apakah ada diskon untuk pelajar, pengajar, atau tim?",
+    "answer": "Ya, Lumino menyediakan harga khusus untuk pelajar, pengajar, organisasi non-profit, dan tim profesional. Untuk mendapatkan diskon, Anda perlu memberikan bukti valid (seperti kartu pelajar, email institusi, atau domain bisnis). Kami juga menyediakan lisensi tim untuk pembelian dalam jumlah banyak dengan sistem pembayaran dan pengelolaan terpusat. Hubungi tim penjualan kami untuk mendiskusikan kebutuhan Anda, dan kami akan membantu menyiapkan penawaran yang sesuai."
   },
   {
-    "question": "Can I use Lumino products for commercial projects?",
-    "answer":
-      "Absolutely. Most Lumino products come with a commercial license that allows you to use them in client work, commercial apps, websites, or digital services. Please refer to the specific licensing details listed on each product page, as some items may have usage limitations (e.g., not for resale or redistribution). If you're unsure whether your use case is permitted, our licensing team is happy to clarify."
+    "question": "Apakah produk Lumino bisa digunakan untuk proyek komersial?",
+    "answer": "Tentu saja. Sebagian besar produk Lumino disertai lisensi komersial yang memungkinkan Anda menggunakannya dalam proyek klien, aplikasi berbayar, website bisnis, atau layanan digital lainnya. Silakan lihat detail lisensi pada masing-masing halaman produk karena beberapa produk mungkin memiliki batasan penggunaan (misalnya tidak untuk dijual kembali atau didistribusikan ulang). Jika Anda ragu, tim lisensi kami siap membantu menjelaskan."
   },
   {
-    "question": "Is product support included after purchase?",
-    "answer":
-      "Yes, all Lumino products come with basic customer support included for at least 30 days after purchase. Support includes help with installation, troubleshooting, and usage guidance. Some premium products also include extended support or priority response. You can always access documentation, tutorials, and community forums via your Lumino dashboard."
+    "question": "Apakah saya mendapat dukungan setelah membeli produk?",
+    "answer": "Ya, semua produk Lumino disertai dukungan pelanggan dasar setidaknya selama 30 hari setelah pembelian. Dukungan mencakup bantuan instalasi, pemecahan masalah, dan panduan penggunaan. Beberapa produk premium juga menawarkan dukungan tambahan atau prioritas. Anda juga bisa mengakses dokumentasi, tutorial, dan forum komunitas langsung dari dashboard Lumino Anda."
   }
 ]

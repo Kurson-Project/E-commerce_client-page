@@ -1,4 +1,5 @@
 import { StarRating } from "@/components/ui/star-rating";
+import { formatPrice } from "@/lib/format";
 import { useNavigate } from "react-router-dom";
 
 interface CardProdukProps {
@@ -28,7 +29,7 @@ const CardProduk = ({ title, image, price, tools, className, rating }: CardProdu
             <div className="flex flex-col p-2">
                 <div className="flex justify-between items-center">
                     <h2 className="text-lg font-semibold mb-2 truncate w-0 flex-1">{title}</h2>
-                    <h2 className="text-lg mb-2 whitespace-nowrap">${price}</h2>
+                    <h2 className="font-medium mb-2 whitespace-nowrap">{formatPrice(price)}</h2>
                 </div>
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                     <div className="flex items-center gap-2">
